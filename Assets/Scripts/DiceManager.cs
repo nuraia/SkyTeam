@@ -8,8 +8,7 @@ public class DiceManager : MonoBehaviour
     public List<DiceRoll> DiceFaceList = new List<DiceRoll>();
     public List<DiceRoll> OrangeDiceList = new List<DiceRoll>();
     public List<DiceRoll> BlueDiceList = new List<DiceRoll>();
-    private Sprite DiceFaceImage;
-    private int DiceFaceIndex;
+    
     public GameObject PilotDiceSlot;
     public GameObject CopilotDiceSlot;
     
@@ -37,7 +36,7 @@ public class DiceManager : MonoBehaviour
 
     void RandomRiceGeneratetion(GameObject panel, bool IsPilot)
     {
-
+        
         if (IsPilot)
         {
             for (int i = 1; i <= 4; i++)
@@ -47,6 +46,7 @@ public class DiceManager : MonoBehaviour
                 Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
                 InstantiatedDiceImage.sprite = currentDiceRoll.BlueDiceFace;
                 var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
+                IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
                 BlueDiceList.Add(currentDiceRoll);
             }
 
@@ -63,6 +63,7 @@ public class DiceManager : MonoBehaviour
                 Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
                 InstantiatedDiceImage.sprite = currentDiceRoll.OrangeDiceFace;
                 var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
+                IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
                 OrangeDiceList.Add(currentDiceRoll);
             }
             
@@ -73,5 +74,7 @@ public class DiceManager : MonoBehaviour
 
         
     }
+
+   
 
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 
 public class TurnManager : MonoBehaviour
 {
+    public static TurnManager Instance;
     public GameObject pilot;
     public GameObject copilot;
     int turn;
@@ -13,6 +15,14 @@ public class TurnManager : MonoBehaviour
     public bool IsPilotTurn = true;
     public DiceManager diceManager;
     
+    public List<GameObject> AllOrangeSlot = new List<GameObject>();
+    public List<GameObject> AllBlueSlot = new List<GameObject>();
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(Instance);
+    }
     private void Start()
     {
         turnButton.onClick.AddListener(OnClickTurnShift);
@@ -26,16 +36,16 @@ public class TurnManager : MonoBehaviour
         pilot.GetComponent<Image>().color = Color.green;
         if (diceManager.BlueDiceList.Count <= 0)
         {
+            TurnOffSlot(AllOrangeSlot);
+            TurnOffSlot(AllBlueSlot);
             Button btn = pilot.GetComponentInChildren<Button>();
             DiceGeneration(IsPilotTurn, btn);
             
         }
         else 
         {
-            if (turn > 0) 
-            {
-                Debug.Log("P");
-            }
+            TurnONSlot(AllBlueSlot);
+            TurnONSlot(AllOrangeSlot);
         }
         IsPilotTurn = false;
        
@@ -48,16 +58,16 @@ public class TurnManager : MonoBehaviour
        
         if (diceManager.OrangeDiceList.Count <= 0)
         {
+            TurnOffSlot(AllOrangeSlot);
+            TurnOffSlot(AllBlueSlot);
             Button btn = copilot.GetComponentInChildren<Button>();
             DiceGeneration(IsPilotTurn, btn);
             
         }
         else 
         {
-            if (turn > 0)
-            {
-                Debug.Log("cP");
-            }
+            TurnONSlot(AllBlueSlot);
+            TurnONSlot(AllOrangeSlot);
         }
         IsPilotTurn = true;
         
@@ -74,7 +84,6 @@ public class TurnManager : MonoBehaviour
     {
         await UniTask.Delay(1000);
         btn.interactable = false;
-        //ActivateCopilot();
     }
 
     public void OnClickTurnShift()
@@ -84,6 +93,8 @@ public class TurnManager : MonoBehaviour
             copilot.GetComponent<Image>().color = Color.white;
             diceManager.CopilotDiceSlot.SetActive(false);
             diceManager.PilotDiceSlot.SetActive(true);
+            TurnOffSlot(AllOrangeSlot);
+            TurnONSlot(AllBlueSlot);
             ActivatePilot();
         }
         else
@@ -91,8 +102,28 @@ public class TurnManager : MonoBehaviour
             pilot.GetComponent<Image>().color = Color.white;
             diceManager.PilotDiceSlot.SetActive(false);
             diceManager.CopilotDiceSlot.SetActive(true);
+            TurnOffSlot(AllBlueSlot);
+            TurnONSlot(AllOrangeSlot);
             ActivateCopilot();
 
+        }
+    }
+
+    void TurnOffSlot(List< GameObject> slots)
+    {
+        foreach (var slot in slots)
+        {
+            var item = slot.GetComponent<Image>();
+            item.raycastTarget = false;
+        }
+    }
+
+    void TurnONSlot(List<GameObject> slots)
+    {
+        foreach (var slot in slots)
+        {
+            var item = slot.GetComponent<Image>();
+            item.raycastTarget = true;
         }
     }
 }
