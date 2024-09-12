@@ -44,11 +44,12 @@ public class TurnManager : MonoBehaviour
         }
         else 
         {
+            
             TurnONSlot(AllBlueSlot);
-            TurnONSlot(AllOrangeSlot);
+            
         }
         IsPilotTurn = false;
-       
+        
     }
 
     public async UniTask ActivateCopilot()
@@ -66,11 +67,20 @@ public class TurnManager : MonoBehaviour
         }
         else 
         {
-            TurnONSlot(AllBlueSlot);
+            
             TurnONSlot(AllOrangeSlot);
         }
         IsPilotTurn = true;
         
+    }
+
+    public async UniTask GameTurn()
+    {
+        UIManager.Instance.PopMessage();
+        await UniTask.Delay(2000);
+       
+        OnClickTurnShift();
+
     }
 
     void DiceGeneration(bool IsPilot, Button btn) 
@@ -79,6 +89,7 @@ public class TurnManager : MonoBehaviour
             diceManager.DiceRolling(IsPilot);
             ButtonUnInteract(btn);
         });
+
     }
     async UniTask ButtonUnInteract(Button btn)
     {
@@ -109,7 +120,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    void TurnOffSlot(List< GameObject> slots)
+    public void TurnOffSlot(List< GameObject> slots)
     {
         foreach (var slot in slots)
         {
@@ -126,4 +137,6 @@ public class TurnManager : MonoBehaviour
             item.raycastTarget = true;
         }
     }
+
+ 
 }

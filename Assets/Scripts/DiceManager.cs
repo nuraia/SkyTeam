@@ -66,7 +66,9 @@ public class DiceManager : MonoBehaviour
                 IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
                 OrangeDiceList.Add(currentDiceRoll);
             }
-            
+
+            TurnManager.Instance.IsPilotTurn = true;
+            TurnManager.Instance.GameTurn();
             currentDiceRoll.Prefab.GetComponentInChildren<Image>().sprite = null;
             
             
