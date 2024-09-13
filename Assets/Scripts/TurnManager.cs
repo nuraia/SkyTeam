@@ -14,7 +14,7 @@ public class TurnManager : MonoBehaviour
     public Button turnButton;
     public bool IsPilotTurn = true;
     public DiceManager diceManager;
-    
+    public GameRoundManager gameRoundManager;
     public List<GameObject> AllOrangeSlot = new List<GameObject>();
     public List<GameObject> AllBlueSlot = new List<GameObject>();
 
@@ -27,7 +27,7 @@ public class TurnManager : MonoBehaviour
     {
         turnButton.onClick.AddListener(OnClickTurnShift);
         if (IsPilotTurn) ActivatePilot();
-        turn = 4;
+        turn = 0;
     }
 
     public async UniTask ActivatePilot()
@@ -76,7 +76,7 @@ public class TurnManager : MonoBehaviour
 
     public async UniTask GameTurn()
     {
-        UIManager.Instance.PopMessage();
+        UIManager.Instance.PopMessage("Game Starts");
         await UniTask.Delay(2000);
        
         OnClickTurnShift();
@@ -99,24 +99,33 @@ public class TurnManager : MonoBehaviour
 
     public void OnClickTurnShift()
     {
-        if (IsPilotTurn)
+        turn++;
+        if (turn > 9)
         {
-            copilot.GetComponent<Image>().color = Color.white;
-            diceManager.CopilotDiceSlot.SetActive(false);
-            diceManager.PilotDiceSlot.SetActive(true);
-            TurnOffSlot(AllOrangeSlot);
-            TurnONSlot(AllBlueSlot);
-            ActivatePilot();
+            
+            gameRoundManager.GameRoundEndCheck();
         }
         else
         {
-            pilot.GetComponent<Image>().color = Color.white;
-            diceManager.PilotDiceSlot.SetActive(false);
-            diceManager.CopilotDiceSlot.SetActive(true);
-            TurnOffSlot(AllBlueSlot);
-            TurnONSlot(AllOrangeSlot);
-            ActivateCopilot();
+            if (IsPilotTurn)
+            {
+                copilot.GetComponent<Image>().color = Color.white;
+                diceManager.CopilotDiceSlot.SetActive(false);
+                diceManager.PilotDiceSlot.SetActive(true);
+                TurnOffSlot(AllOrangeSlot);
+                TurnONSlot(AllBlueSlot);
+                ActivatePilot();
+            }
+            else
+            {
+                pilot.GetComponent<Image>().color = Color.white;
+                diceManager.PilotDiceSlot.SetActive(false);
+                diceManager.CopilotDiceSlot.SetActive(true);
+                TurnOffSlot(AllBlueSlot);
+                TurnONSlot(AllOrangeSlot);
+                ActivateCopilot();
 
+            }
         }
     }
 

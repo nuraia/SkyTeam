@@ -14,7 +14,7 @@ public class DiceSlotHandler : MonoBehaviour, IDiceCheckable
         if (requiredValues.Contains(diceAmount))
         {
 
-            Debug.Log("Requirement fullfilled" + diceAmount);
+            //Debug.Log("Requirement fullfilled" + diceAmount);
 
             //GameManager.Instance.RangeColour(OrangeTextList);
             GameManager.Instance.NewSlotOpenFriction();

@@ -17,8 +17,10 @@ public class GameManager : MonoBehaviour
     private int EndingRangeIndex;
     private int StaringRangeIndex;
     private int AxisDifference;
-    private int EngineSum;
-    private int Enginecounter;
+    public int EngineSum;
+    public int Enginecounter;
+    public int Axiscounter;
+    public bool IsPlaneStable = true;
     bool Pilot = false;
     void Awake()
     {
@@ -75,40 +77,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AxisPlaneStable(int axisAmount)
+    public void ButtonUninteractable(GameObject slot)
     {
-        if (AxisDifference == 0)
-        {
-            AxisDifference = axisAmount;
-            if (!TurnManager.Instance.IsPilotTurn) Pilot = true;
-            Debug.Log($"{Pilot} first");
-        }
-        else
-        {
-            AxisDifference -= axisAmount;
-            PlaneImageRotate(AxisDifference);
-        }
-        
-        
+        var item = slot.GetComponent<Image>();
+        item.raycastTarget = false;
     }
 
-    void PlaneImageRotate(int AxisDifference)
-    {
-        if (Pilot && AxisDifference <= 3)
-        {
-            RectTransform rectTransform = PlaneImage.GetComponent<RectTransform>();
-            rectTransform.Rotate(new Vector3(0, 0, AxisDifference * 30));
-        }
-        else if (!Pilot && AxisDifference <= 3)
-        {
-            RectTransform rectTransform = PlaneImage.GetComponent<RectTransform>();
-            rectTransform.Rotate(new Vector3(0, 0, -AxisDifference * 30));
-        }
-        else
-        {
-            Debug.Log($"GameOver");
-        }
-    }
+  
     public void EngineSlotChecker(int slotAmount)
     {
         Enginecounter++;
@@ -117,7 +92,7 @@ public class GameManager : MonoBehaviour
         int orangedot = 8 + EndingRangeIndex;
         
 
-        Debug.Log($"Engine Sum {EngineSum} starting Index {5 + StaringRangeIndex} and ending Index {8 + EndingRangeIndex}");
+       // Debug.Log($"Engine Sum {EngineSum} starting Index {5 + StaringRangeIndex} and ending Index {8 + EndingRangeIndex}");
         if (Enginecounter >= 2)
         {
             if (EngineSum >= bluedot && EngineSum <= orangedot)
@@ -125,7 +100,7 @@ public class GameManager : MonoBehaviour
                 if (PlanePanel.transform.childCount > 0)
                 {
                     Destroy(PlanePanel.transform.GetChild(0).gameObject);
-                    Debug.Log("yay");
+                    //Debug.Log("yay");
                 }
 
             }
@@ -136,7 +111,7 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy(PlanePanel.transform.GetChild(0).gameObject);
                     Destroy(PlanePanel.transform.GetChild(1).gameObject);
-                    Debug.Log("yay2");
+                    //Debug.Log("yay2");
 
                 }
 

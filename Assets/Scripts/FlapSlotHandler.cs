@@ -17,6 +17,7 @@ public class FlapSlotHandler : MonoBehaviour, IDiceCheckable
 
             //Debug.Log("Requirement fullfilled" + diceAmount);
            
+            
             GameManager.Instance.RangeColour(OrangeTextList);
             GameManager.Instance.NewSlotOpenFlaps();
             

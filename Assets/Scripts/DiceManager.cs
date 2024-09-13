@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class DiceManager : MonoBehaviour
 {
     public List<DiceRoll> DiceFaceList = new List<DiceRoll>();
-    public List<DiceRoll> OrangeDiceList = new List<DiceRoll>();
-    public List<DiceRoll> BlueDiceList = new List<DiceRoll>();
+    public List<GameObject> OrangeDiceList = new List<GameObject>();
+    public List<GameObject> BlueDiceList = new List<GameObject>();
     
     public GameObject PilotDiceSlot;
     public GameObject CopilotDiceSlot;
@@ -47,7 +47,8 @@ public class DiceManager : MonoBehaviour
                 InstantiatedDiceImage.sprite = currentDiceRoll.BlueDiceFace;
                 var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
                 IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
-                BlueDiceList.Add(currentDiceRoll);
+                BlueDiceList.Add(currentDiceRoll.Prefab);
+
             }
 
             
@@ -64,7 +65,7 @@ public class DiceManager : MonoBehaviour
                 InstantiatedDiceImage.sprite = currentDiceRoll.OrangeDiceFace;
                 var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
                 IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
-                OrangeDiceList.Add(currentDiceRoll);
+                OrangeDiceList.Add(currentDiceRoll.Prefab);
             }
 
             TurnManager.Instance.IsPilotTurn = true;

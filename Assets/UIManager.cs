@@ -17,10 +17,10 @@ public class UIManager : MonoBehaviour
         else Destroy(Instance);
     }
 
-    public void PopMessage()
+    public void PopMessage(string message)
     {
         popUpMessage.gameObject.SetActive(true);
-        popUpMessage.text = "Game Starts";
+        popUpMessage.text = message;
         popUpMessage.transform.DOScale(targetScale, animationDuration)
             .OnComplete(() =>
             {

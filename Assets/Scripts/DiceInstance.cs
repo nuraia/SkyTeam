@@ -9,6 +9,7 @@ public class DiceInstance : MonoBehaviour
     public void LoadDiceData(DiceRoll DiceData)
     {
         diceNo = DiceData.diceNumber;
+      
     }
 
 

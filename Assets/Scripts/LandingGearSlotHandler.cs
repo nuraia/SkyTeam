@@ -17,8 +17,10 @@ public class LandingGearSlotHandler : MonoBehaviour, IDiceCheckable
     {
         if (requiredValues.Contains(diceAmount))
         {
+
             
-            Debug.Log("Requirement fullfilled" + diceAmount);
+
+
             GameManager.Instance.RangeColour(BlueTextList);
 
         }
