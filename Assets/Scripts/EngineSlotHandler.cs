@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EngineSlotHandler : MonoBehaviour, IDiceCheckable
 {
-    public void CheckDiceAmount(int diceAmount)
+    public void CheckDiceAmount(int diceAmount, GameObject dice)
     {
         if (diceAmount > 0)
         {

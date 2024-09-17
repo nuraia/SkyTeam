@@ -14,8 +14,8 @@ public class AxisSlotHandler : MonoBehaviour, IDiceCheckable
     private int AxisPilot = 0;
     private int AxisCoPilot = 0;
     public Image PlaneImage;
-    
-    public void CheckDiceAmount(int diceAmount)
+    private int subtraction = 0;
+    public void CheckDiceAmount(int diceAmount, GameObject dice)
     {
         slotValue = diceAmount;
         GameManager.Instance.Axiscounter++;
@@ -32,14 +32,20 @@ public class AxisSlotHandler : MonoBehaviour, IDiceCheckable
 
         }
         //Debug.Log(AxisCoPilot);
-        if (AxisPilot > 0 && AxisCoPilot > 0) PlaneImageRotate(AxisPilot - AxisCoPilot);
-        else Debug.Log($"AxisCoPilot {AxisCoPilot} and AxisPilot{AxisPilot}");
+        if (AxisPilot > 0 && AxisCoPilot > 0)
+        {
+            PlaneImageRotate(AxisPilot,AxisCoPilot);
+            AxisCoPilot = 0; AxisPilot = 0;
+        }
+        
+        //else Debug.Log($"AxisCoPilot {AxisCoPilot} and AxisPilot{AxisPilot}");
 
     }
 
-    void PlaneImageRotate(int subtraction)
+    void PlaneImageRotate(int pilotAxis, int copilotAxis)
     {
-        Debug.Log("Sub" + Math.Abs(subtraction));
+        subtraction += pilotAxis - copilotAxis;
+        Debug.Log("Sub" + (subtraction));
         if (Math.Abs(subtraction) < 4)
         {
             if (subtraction < 0)

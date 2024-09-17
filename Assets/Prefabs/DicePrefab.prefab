@@ -112,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 6, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &-1410122560673932134
 MonoBehaviour:
@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2509d051d3e82543acbd108d1774d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceNo: 0

@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     public GameObject copilot;
     int turn;
     public Button turnButton;
-    public bool IsPilotTurn = true;
+    public bool IsPilotTurn ;
     public DiceManager diceManager;
     public GameRoundManager gameRoundManager;
     public List<GameObject> AllOrangeSlot = new List<GameObject>();
@@ -26,7 +26,15 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         turnButton.onClick.AddListener(OnClickTurnShift);
-        if (IsPilotTurn) ActivatePilot();
+        IsPilotTurn = true;
+        TurnInitiate(IsPilotTurn);
+        OnClickTurnShift();
+    }
+
+    public void TurnInitiate(bool IsPilotTurn)
+    {
+        //if (IsPilotTurn) ActivatePilot();
+       // else ActivateCopilot();
         turn = 0;
     }
 
@@ -39,6 +47,7 @@ public class TurnManager : MonoBehaviour
             TurnOffSlot(AllOrangeSlot);
             TurnOffSlot(AllBlueSlot);
             Button btn = pilot.GetComponentInChildren<Button>();
+            btn.interactable = true;
             DiceGeneration(IsPilotTurn, btn);
             
         }
@@ -62,6 +71,7 @@ public class TurnManager : MonoBehaviour
             TurnOffSlot(AllOrangeSlot);
             TurnOffSlot(AllBlueSlot);
             Button btn = copilot.GetComponentInChildren<Button>();
+            btn.interactable = true;
             DiceGeneration(IsPilotTurn, btn);
             
         }
@@ -74,9 +84,9 @@ public class TurnManager : MonoBehaviour
         
     }
 
-    public async UniTask GameTurn()
+    public async UniTask GameTurn(string message)
     {
-        UIManager.Instance.PopMessage("Game Starts");
+        UIManager.Instance.PopMessage(message);
         await UniTask.Delay(2000);
        
         OnClickTurnShift();
@@ -97,16 +107,19 @@ public class TurnManager : MonoBehaviour
         btn.interactable = false;
     }
 
+
     public void OnClickTurnShift()
     {
-        turn++;
+        
+        //Debug.Log($"Turn no {turn}");
         if (turn > 9)
         {
-            
+            TurnManager.Instance.GameTurn("New Turn");
             gameRoundManager.GameRoundEndCheck();
         }
         else
         {
+            turn++;
             if (IsPilotTurn)
             {
                 copilot.GetComponent<Image>().color = Color.white;

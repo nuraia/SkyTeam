@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
 
     public Image PlaneImage;
     
-    private int EndingRangeIndex;
-    private int StaringRangeIndex;
-    private int AxisDifference;
+    public int EndingRangeIndex;
+    public int StaringRangeIndex;
+    public int AxisDifference;
     public int EngineSum;
     public int Enginecounter;
     public int Axiscounter;
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     {
         Enginecounter++;
         EngineSum += slotAmount;
-        int bluedot = 5 + StaringRangeIndex;
+        int bluedot = 4 + StaringRangeIndex;
         int orangedot = 8 + EndingRangeIndex;
         
 

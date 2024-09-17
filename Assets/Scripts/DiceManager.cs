@@ -22,12 +22,12 @@ public class DiceManager : MonoBehaviour
 
     public void DiceRolling(bool IsPilot)
     {
-        if (IsPilot)
+        if (IsPilot && PilotDiceSlot.transform.childCount < 4)
         {
             RandomRiceGeneratetion(PilotDiceSlot, true);
             PilotDiceSlot.SetActive(true);
         }
-        else
+        else if(!IsPilot && CopilotDiceSlot.transform.childCount < 4)
         {
             RandomRiceGeneratetion(CopilotDiceSlot, false);
             CopilotDiceSlot.SetActive(true);
@@ -36,7 +36,7 @@ public class DiceManager : MonoBehaviour
 
     void RandomRiceGeneratetion(GameObject panel, bool IsPilot)
     {
-        
+
         if (IsPilot)
         {
             for (int i = 1; i <= 4; i++)
@@ -51,8 +51,8 @@ public class DiceManager : MonoBehaviour
 
             }
 
-            
-            
+
+
         }
 
         else
@@ -69,15 +69,57 @@ public class DiceManager : MonoBehaviour
             }
 
             TurnManager.Instance.IsPilotTurn = true;
-            TurnManager.Instance.GameTurn();
+            TurnManager.Instance.GameTurn("Game Starts");
             currentDiceRoll.Prefab.GetComponentInChildren<Image>().sprite = null;
-            
-            
+
+
         }
 
-        
+
     }
 
-   
 
+    //void RandomRiceGeneratetion(GameObject panel, bool IsPilot)
+    //{
+
+    //    if (IsPilot)
+    //    {
+    //        for (int i = 0; i <6; i++)
+    //        {
+    //            //int RandomIndex = Random.Range(1, 7);
+    //            currentDiceRoll = DiceFaceList[i];
+    //            Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
+    //            InstantiatedDiceImage.sprite = currentDiceRoll.BlueDiceFace;
+    //            var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
+    //            IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
+    //            BlueDiceList.Add(currentDiceRoll.Prefab);
+
+    //        }
+
+
+
+    //    }
+
+    //    else
+    //    {
+    //        for (int i = 0; i < 6; i++)
+    //        {
+    //            //int RandomIndex = Random.Range(1, 7);
+    //            currentDiceRoll = DiceFaceList[i];
+    //            Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
+    //            InstantiatedDiceImage.sprite = currentDiceRoll.OrangeDiceFace;
+    //            var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
+    //            IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
+    //            OrangeDiceList.Add(currentDiceRoll.Prefab);
+    //        }
+
+    //        TurnManager.Instance.IsPilotTurn = true;
+    //        TurnManager.Instance.GameTurn("Game Starts");
+    //        currentDiceRoll.Prefab.GetComponentInChildren<Image>().sprite = null;
+
+
+    //    }
+
+
+    //}
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameRoundManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GameRoundManager : MonoBehaviour
     public GameObject GameRoundPanel;
     public GameObject OrangeSlotPanel;
     public GameObject BlueSlotPanel;
-
+    public List<GameObject> AxisEngineSlots = new List<GameObject>();
     void start()
     {
         currentRound = 0;
@@ -36,25 +37,52 @@ public class GameRoundManager : MonoBehaviour
                             }
                             else Debug.Log("Game Over");
                         }
-                        
+                        else Debug.Log("Game Over");
+
                     }
                     else if (GameRoundPanel.transform.childCount > 1)
                     {
                         Destroy(GameRoundPanel.transform.GetChild(0).gameObject);
                         UIManager.Instance.PopMessage("New Turn");
                         currentRound++;
-                        Debug.Log("current Round" + currentRound);
+                        //Debug.Log("current Round" + currentRound);
                         NewTurnActivate();
+                        
                     }
                 }
             }
         }
     }
 
-    void NewTurnActivate()
+    public void NewTurnActivate()
     {
         TurnManager.Instance.diceManager.BlueDiceList.Clear(); 
         TurnManager.Instance.diceManager.OrangeDiceList.Clear();
-        TurnManager.Instance.ActivatePilot();
+        TurnManager.Instance.IsPilotTurn = true;
+        //TurnManager.Instance.OnClickTurnShift();
+        TurnManager.Instance.TurnInitiate(TurnManager.Instance.IsPilotTurn);
+        ClearSlots();
+    }
+
+    public void ClearSlots()
+    {
+        for (int i = 0; i < AxisEngineSlots.Count; i++)
+        {
+            
+            var diceComponent = AxisEngineSlots[i].transform.GetChild(0);
+            
+            Destroy(diceComponent.gameObject); 
+            
+        }
+        GameManager.Instance.Axiscounter = 0;
+        GameManager.Instance.Enginecounter = 0;
+        GameManager.Instance.EngineSum = 0;
+       
+
+    }
+
+    public void OnRestartButtonClick()
+    {
+        SceneManager.LoadScene(0);
     }
 }

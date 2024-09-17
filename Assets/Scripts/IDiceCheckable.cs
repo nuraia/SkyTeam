@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDiceCheckable
 {
-    void CheckDiceAmount(int diceAmount);
+    void CheckDiceAmount(int diceAmount, GameObject dice);
 }

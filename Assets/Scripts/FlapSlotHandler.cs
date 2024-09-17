@@ -7,17 +7,17 @@ public class FlapSlotHandler : MonoBehaviour, IDiceCheckable
 {
     public List<int> requiredValues = new List<int>();
     public List<TextMeshProUGUI> OrangeTextList = new List<TextMeshProUGUI>();
-    private int EndingRangeIndex;
+   
 
  
-    public void CheckDiceAmount(int diceAmount)
+    public void CheckDiceAmount(int diceAmount, GameObject dice)
     {
         if (requiredValues.Contains(diceAmount))
         {
 
             //Debug.Log("Requirement fullfilled" + diceAmount);
-           
-            
+
+            dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
             GameManager.Instance.RangeColour(OrangeTextList);
             GameManager.Instance.NewSlotOpenFlaps();
             
