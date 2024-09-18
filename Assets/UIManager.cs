@@ -10,7 +10,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float animationDuration;
     private Vector3 targetScale = new Vector3(1, 1, 1);
     private Vector3 TextInitialScale = new Vector3(0, 0, 0);
-
+    public GameObject blueSlotPlusOne;
+    public GameObject OrangeSlotPlusOne;
+    public GameObject orangeSlotMinusOne;
+    public GameObject blueSlotMinusOne;
+    public GameObject coffeePanel;
+   
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -34,4 +39,26 @@ public class UIManager : MonoBehaviour
         popUpMessage.transform.DOScale(TextInitialScale, animationDuration);
         GameManager.Instance.gameObject.SetActive(false);
     }
+
+    public void OnClickPlusOne()
+    {
+        blueSlotPlusOne.SetActive(true);
+        OrangeSlotPlusOne.SetActive(true);
+    }
+    public void OnClickMinusOne()
+    {
+        blueSlotMinusOne.SetActive(true);
+        orangeSlotMinusOne.SetActive(true);
+    }
+
+    public void OnClickCancelButton()
+    {
+        coffeePanel.SetActive(false);
+    }
+
+    public void OnClickCoffeeButton()
+    {
+        coffeePanel.SetActive(true);
+    }
+
 }
