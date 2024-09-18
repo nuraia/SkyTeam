@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DiceManager : MonoBehaviour
 {
+    public static DiceManager Instance;
     public List<DiceRoll> DiceFaceList = new List<DiceRoll>();
     public List<GameObject> OrangeDiceList = new List<GameObject>();
     public List<GameObject> BlueDiceList = new List<GameObject>();
@@ -13,6 +14,12 @@ public class DiceManager : MonoBehaviour
     public GameObject CopilotDiceSlot;
     
     private DiceRoll currentDiceRoll;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(Instance);
+    }
     void Start()
     {
         OrangeDiceList.Clear();

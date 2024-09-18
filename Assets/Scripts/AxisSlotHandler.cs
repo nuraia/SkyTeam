@@ -48,7 +48,7 @@ public class AxisSlotHandler : MonoBehaviour, IDiceCheckable
         Debug.Log("Sub" + (subtraction));
         if (Math.Abs(subtraction) < 4)
         {
-            if (subtraction < 0)
+            if (subtraction <= 0)
             {
                 RectTransform rectTransform = PlaneImage.GetComponent<RectTransform>();
                 rectTransform.Rotate(new Vector3(0, 0, subtraction * 30));

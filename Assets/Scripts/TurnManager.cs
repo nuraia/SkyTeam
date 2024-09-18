@@ -1,9 +1,9 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
+
 
 public class TurnManager : MonoBehaviour
 {

@@ -11,11 +11,13 @@ public class UIManager : MonoBehaviour
     private Vector3 targetScale = new Vector3(1, 1, 1);
     private Vector3 TextInitialScale = new Vector3(0, 0, 0);
     public GameObject blueSlotPlusOne;
-    public GameObject OrangeSlotPlusOne;
-    public GameObject orangeSlotMinusOne;
     public GameObject blueSlotMinusOne;
+    public GameObject DoneMinusOne;
+    public GameObject DonePlusOne;
     public GameObject coffeePanel;
-   
+    public List<GameObject> CoffeebuttonLists = new List<GameObject>();
+    public List<GameObject> CoffeeSlotLists = new List<GameObject>();
+    public int coffee = 0;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -42,13 +44,15 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPlusOne()
     {
+        coffee = 1;
         blueSlotPlusOne.SetActive(true);
-        OrangeSlotPlusOne.SetActive(true);
+        
     }
     public void OnClickMinusOne()
     {
+        coffee = -1;
         blueSlotMinusOne.SetActive(true);
-        orangeSlotMinusOne.SetActive(true);
+        
     }
 
     public void OnClickCancelButton()
@@ -59,6 +63,20 @@ public class UIManager : MonoBehaviour
     public void OnClickCoffeeButton()
     {
         coffeePanel.SetActive(true);
+        
+    }
+
+    public void OnClickDoneButton()
+    {
+        if(CoffeebuttonLists.Count > 0 && CoffeeSlotLists.Count > 0)
+        {
+            CoffeebuttonLists[0].gameObject.SetActive(false);
+            CoffeebuttonLists.RemoveAt(0);
+            Destroy(CoffeeSlotLists[0].transform.GetChild(0).gameObject);
+            CoffeeSlotLists.RemoveAt(0);
+            blueSlotPlusOne.gameObject.SetActive(false);
+            blueSlotMinusOne.gameObject.SetActive(false);
+        }
     }
 
 }

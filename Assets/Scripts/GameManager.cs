@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public int Enginecounter;
     public int Axiscounter;
     public bool IsPlaneStable = true;
-    bool Pilot = false;
+    
     void Awake()
     {
         if(Instance == null) Instance = this;

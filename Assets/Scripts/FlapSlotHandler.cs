@@ -15,7 +15,7 @@ public class FlapSlotHandler : MonoBehaviour, IDiceCheckable
         if (requiredValues.Contains(diceAmount))
         {
 
-            //Debug.Log("Requirement fullfilled" + diceAmount);
+            Debug.Log("Requirement fullfilled" + diceAmount);
 
             dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
             GameManager.Instance.RangeColour(OrangeTextList);

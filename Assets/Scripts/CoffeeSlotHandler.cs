@@ -10,7 +10,8 @@ public class CoffeeSlotHandler : MonoBehaviour, IDiceCheckable
         if (dice!= null)
         {
             coffeeToken.gameObject.SetActive(true);
-           
+            UIManager.Instance.CoffeeSlotLists.Add(gameObject);
+            UIManager.Instance.CoffeebuttonLists.Add(coffeeToken);
         }
         
     }
