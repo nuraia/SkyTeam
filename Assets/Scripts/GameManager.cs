@@ -77,13 +77,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ButtonUninteractable(GameObject slot)
-    {
-        var item = slot.GetComponent<Image>();
-        item.raycastTarget = false;
-    }
 
-  
     public void EngineSlotChecker(int slotAmount)
     {
         Enginecounter++;
@@ -100,7 +94,7 @@ public class GameManager : MonoBehaviour
                 if (PlanePanel.transform.childCount > 0)
                 {
                     Destroy(PlanePanel.transform.GetChild(0).gameObject);
-                    //Debug.Log("yay");
+            
                 }
 
             }
@@ -111,7 +105,7 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy(PlanePanel.transform.GetChild(0).gameObject);
                     Destroy(PlanePanel.transform.GetChild(1).gameObject);
-                    //Debug.Log("yay2");
+                    
 
                 }
 

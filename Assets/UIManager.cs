@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
+using System;
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
@@ -10,14 +13,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float animationDuration;
     private Vector3 targetScale = new Vector3(1, 1, 1);
     private Vector3 TextInitialScale = new Vector3(0, 0, 0);
-    public GameObject blueSlotPlusOne;
-    public GameObject blueSlotMinusOne;
-    public GameObject DoneMinusOne;
-    public GameObject DonePlusOne;
+    
     public GameObject coffeePanel;
-    public List<GameObject> CoffeebuttonLists = new List<GameObject>();
-    public List<GameObject> CoffeeSlotLists = new List<GameObject>();
-    public int coffee = 0;
+    public DiceInstance currentlyUsedCoffeeToken;
+    
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -42,41 +41,23 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.gameObject.SetActive(false);
     }
 
-    public void OnClickPlusOne()
-    {
-        coffee = 1;
-        blueSlotPlusOne.SetActive(true);
-        
-    }
-    public void OnClickMinusOne()
-    {
-        coffee = -1;
-        blueSlotMinusOne.SetActive(true);
-        
-    }
+  
 
     public void OnClickCancelButton()
     {
         coffeePanel.SetActive(false);
+        DiceManager.Instance.DiceChangeSlot.GetComponent<Image>().sprite = null;
+        currentlyUsedCoffeeToken = null;
     }
 
-    public void OnClickCoffeeButton()
+    public void OnClickCoffeeButton(int index)
     {
         coffeePanel.SetActive(true);
-        
+        index = Math.Min(index, DiceManager.Instance.CoffeeButtonLists.Count-1);
+       
+        currentlyUsedCoffeeToken = DiceManager.Instance.CoffeeSlotLists[index].GetComponentInChildren<DiceInstance>();
+
     }
 
-    public void OnClickDoneButton()
-    {
-        if(CoffeebuttonLists.Count > 0 && CoffeeSlotLists.Count > 0)
-        {
-            CoffeebuttonLists[0].gameObject.SetActive(false);
-            CoffeebuttonLists.RemoveAt(0);
-            Destroy(CoffeeSlotLists[0].transform.GetChild(0).gameObject);
-            CoffeeSlotLists.RemoveAt(0);
-            blueSlotPlusOne.gameObject.SetActive(false);
-            blueSlotMinusOne.gameObject.SetActive(false);
-        }
-    }
-
+   
 }

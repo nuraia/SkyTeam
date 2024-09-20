@@ -59,7 +59,6 @@ public class GameRoundManager : MonoBehaviour
         TurnManager.Instance.diceManager.BlueDiceList.Clear(); 
         TurnManager.Instance.diceManager.OrangeDiceList.Clear();
         TurnManager.Instance.IsPilotTurn = true;
-        //TurnManager.Instance.OnClickTurnShift();
         TurnManager.Instance.TurnInitiate(TurnManager.Instance.IsPilotTurn);
         ClearSlots();
     }
@@ -68,17 +67,16 @@ public class GameRoundManager : MonoBehaviour
     {
         for (int i = 0; i < AxisEngineSlots.Count; i++)
         {
-            
-            var diceComponent = AxisEngineSlots[i].transform.GetChild(0);
-            
-            Destroy(diceComponent.gameObject); 
-            
+            if(AxisEngineSlots[i].transform.childCount > 0)
+            {
+                var diceComponent = AxisEngineSlots[i].transform.GetChild(0);
+                Destroy(diceComponent.gameObject);
+            }
         }
         GameManager.Instance.Axiscounter = 0;
         GameManager.Instance.Enginecounter = 0;
         GameManager.Instance.EngineSum = 0;
        
-
     }
 
     public void OnRestartButtonClick()

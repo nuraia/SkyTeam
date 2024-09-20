@@ -33,9 +33,10 @@ public class TurnManager : MonoBehaviour
 
     public void TurnInitiate(bool IsPilotTurn)
     {
-        //if (IsPilotTurn) ActivatePilot();
-       // else ActivateCopilot();
         turn = 0;
+        turnButton.gameObject.SetActive(false);
+       
+       
     }
 
     public async UniTask ActivatePilot()
@@ -64,7 +65,6 @@ public class TurnManager : MonoBehaviour
     public async UniTask ActivateCopilot()
     {
         copilot.GetComponent<Image>().color = Color.green;
-       
        
         if (diceManager.OrangeDiceList.Count <= 0)
         {
@@ -110,8 +110,8 @@ public class TurnManager : MonoBehaviour
 
     public void OnClickTurnShift()
     {
-        
-        //Debug.Log($"Turn no {turn}");
+       
+
         if (turn > 9)
         {
             TurnManager.Instance.GameTurn("New Turn");
