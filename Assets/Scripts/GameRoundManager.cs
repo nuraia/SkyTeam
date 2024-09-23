@@ -12,9 +12,15 @@ public class GameRoundManager : MonoBehaviour
     public GameObject OrangeSlotPanel;
     public GameObject BlueSlotPanel;
     public List<GameObject> AxisEngineSlots = new List<GameObject>();
+    public List<GameObject> FlapsFrictionGearSlots = new List<GameObject>();
+    public GameObject GameoverPanel;
+    public GameObject GamewinPanel;
     void start()
     {
         currentRound = 0;
+        GameoverPanel.SetActive(false);
+        GamewinPanel.SetActive(false);
+            
     }
     public void GameRoundEndCheck()
     {
@@ -31,13 +37,20 @@ public class GameRoundManager : MonoBehaviour
                     {
                         if (GameManager.Instance.PlanePanel.transform.childCount == 1)
                         {
-                            if (GameManager.Instance.IsPlaneStable && GameManager.Instance.EngineSum < 6)
+                            if (GameManager.Instance.IsPlaneStable && GameManager.Instance.EngineSum <= 6 && GameManager.Instance.FrictionCount >= 3)
                             {
-                                Debug.Log("Game Wins");
+                                GamewinPanel.SetActive(true);
+                                TurnManager.Instance.turnButton.gameObject.SetActive(false);
                             }
-                            else Debug.Log("Game Over");
+                            else
+                            {
+                                GameManager.Instance.GameOver();
+                            }
                         }
-                        else Debug.Log("Game Over");
+                        else
+                        {
+                            GameManager.Instance.GameOver();
+                        }
 
                     }
                     else if (GameRoundPanel.transform.childCount > 1)
@@ -49,12 +62,28 @@ public class GameRoundManager : MonoBehaviour
                         NewTurnActivate();
                         
                     }
+                    else
+                    {
+                        GameManager.Instance.GameOver();
+                    }
+                }
+                else
+                {
+                    GameManager.Instance.GameOver();
                 }
             }
+            else
+            {
+                GameManager.Instance.GameOver();
+            }
+        }
+        else
+        {
+            GameManager.Instance.GameOver();
         }
     }
-
-    public void NewTurnActivate()
+  
+public void NewTurnActivate()
     {
         TurnManager.Instance.diceManager.BlueDiceList.Clear(); 
         TurnManager.Instance.diceManager.OrangeDiceList.Clear();
@@ -70,7 +99,37 @@ public class GameRoundManager : MonoBehaviour
             if(AxisEngineSlots[i].transform.childCount > 0)
             {
                 var diceComponent = AxisEngineSlots[i].transform.GetChild(0);
+                var AxisSlot = diceComponent.GetComponent<AxisSlotHandler>();
+                if (AxisSlot != null)
+                {
+                    AxisSlot.AxisPilot = 0;
+                    AxisSlot.AxisCoPilot = 0;
+                    AxisSlot.slotValue = 0;
+                    AxisSlot.slot.GetComponent<AxisSlotHandler>().slotValue = 0;
+
+                }
                 Destroy(diceComponent.gameObject);
+            }
+        }
+        foreach (var slot in FlapsFrictionGearSlots)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                if (slot.GetComponent<LandingGearSlotHandler>() != null)
+                {
+                    var dice = slot.GetComponent<LandingGearSlotHandler>();
+                    if(dice.IsMatched) dice.Dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                }
+                if(slot.GetComponent<FlapSlotHandler>() != null)
+                {
+                    var dice = slot.GetComponent<FlapSlotHandler>();
+                    if (dice.IsMatched) dice.Dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                }
+                if (slot.GetComponent<DiceSlotHandler>() != null)
+                {
+                    var dice = slot.GetComponent<DiceSlotHandler>();
+                    if (dice.IsMatched) dice.Dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
+                }
             }
         }
         GameManager.Instance.Axiscounter = 0;
@@ -83,4 +142,5 @@ public class GameRoundManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
 }

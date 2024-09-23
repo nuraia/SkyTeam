@@ -8,7 +8,7 @@ public class DiceSlotDrop : MonoBehaviour, IDropHandler
     {
         //Debug.Log("Ondrop");
         if (transform.childCount != 0) return;
-
+        TurnManager.Instance.turnButton.gameObject.SetActive(true);
         GameObject dropped = eventData.pointerDrag;
         DragDrop draggableItem = dropped.GetComponent<DragDrop>();
         draggableItem.parentAfterDrag = transform;

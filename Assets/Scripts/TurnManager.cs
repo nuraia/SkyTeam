@@ -17,7 +17,8 @@ public class TurnManager : MonoBehaviour
     public GameRoundManager gameRoundManager;
     public List<GameObject> AllOrangeSlot = new List<GameObject>();
     public List<GameObject> AllBlueSlot = new List<GameObject>();
-
+    int PilotTurn = 0;
+    int CoPilotTurn = 0;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -35,13 +36,14 @@ public class TurnManager : MonoBehaviour
     {
         turn = 0;
         turnButton.gameObject.SetActive(false);
-       
-       
+        PilotTurn = 0;
+        CoPilotTurn = 0;
+
     }
 
     public async UniTask ActivatePilot()
     {
-        
+        PilotTurn++;
         pilot.GetComponent<Image>().color = Color.green;
         if (diceManager.BlueDiceList.Count <= 0)
         {
@@ -64,6 +66,7 @@ public class TurnManager : MonoBehaviour
 
     public async UniTask ActivateCopilot()
     {
+        CoPilotTurn++;
         copilot.GetComponent<Image>().color = Color.green;
        
         if (diceManager.OrangeDiceList.Count <= 0)
@@ -106,13 +109,17 @@ public class TurnManager : MonoBehaviour
         await UniTask.Delay(1000);
         btn.interactable = false;
     }
-
+    //async UniTask turnShift()
+    //{
+    //    await UniTask.Delay(3000);
+    //    turnButton.gameObject.SetActive(true);
+    //}
 
     public void OnClickTurnShift()
     {
-       
-
-        if (turn > 9)
+        turnButton.gameObject.SetActive(false);
+        //turnShift();
+        if (PilotTurn + CoPilotTurn > 9)
         {
             TurnManager.Instance.GameTurn("New Turn");
             gameRoundManager.GameRoundEndCheck();

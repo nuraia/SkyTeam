@@ -69,8 +69,8 @@ public class DiceManager : MonoBehaviour
                     BlueDiceList.Add(currentDiceRoll.Prefab);
                     
                 }
-                
-            }
+                TurnManager.Instance.turnButton.gameObject.SetActive(true);
+        }
             else
             {
 
@@ -93,7 +93,7 @@ public class DiceManager : MonoBehaviour
                 TurnManager.Instance.GameTurn("Game Starts");
                 currentDiceRoll.Prefab.GetComponentInChildren<Image>().sprite = null;
             }
-        TurnManager.Instance.turnButton.gameObject.SetActive(true);
+       
     }
     public void OnPrfabClick(GameObject DicePrefab)
     {
@@ -115,7 +115,7 @@ public class DiceManager : MonoBehaviour
     {
        
         var diceInstance = dice.GetComponent<DiceInstance>();
-        Debug.Log(diceInstance.diceNo);
+        //Debug.Log(diceInstance.diceNo);
         if (diceInstance.diceNo < 6)
         {
             var diceImage = diceInstance.GetComponentInChildren<Image>();

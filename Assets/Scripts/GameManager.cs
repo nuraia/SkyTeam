@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject>Flaps = new List<GameObject>();
     public List<GameObject>Friction = new List<GameObject>();
     public GameObject PlanePanel;
-
+    public GameObject GameoverPanel;
     public Image PlaneImage;
-    
+    public int previousSubtraction = 0;
     public int EndingRangeIndex;
     public int StaringRangeIndex;
     public int AxisDifference;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     public int Enginecounter;
     public int Axiscounter;
     public bool IsPlaneStable = true;
-    
+    public int FrictionCount;
     void Awake()
     {
         if(Instance == null) Instance = this;
@@ -33,12 +34,14 @@ public class GameManager : MonoBehaviour
         AxisDifference = 0;
         EngineSum = 0;
         Enginecounter = 0;
+        FrictionCount = 0;
     }
 
     public void RangeColour(List<TextMeshProUGUI> RangeList)
     {
         if(!TurnManager.Instance.IsPilotTurn)
         {
+            //if(StaringRangeIndex > 1) RangeList[StaringRangeIndex-1].GetComponent<TextMeshProUGUI>().color = Color.gray;
             TextMeshProUGUI rangeText = RangeList[StaringRangeIndex].GetComponent<TextMeshProUGUI>();
             rangeText.color = Color.cyan;
             StaringRangeIndex++;
@@ -77,6 +80,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void GameOver()
+    {
+        IsPlaneStable = false;
+        GameoverPanel.SetActive(true);
+        TurnManager.Instance.GameTurn("GameOver");
+        TurnManager.Instance.turnButton.gameObject.SetActive(false);
+    }
 
     public void EngineSlotChecker(int slotAmount)
     {

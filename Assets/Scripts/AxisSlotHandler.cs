@@ -9,32 +9,38 @@ public class AxisSlotHandler : MonoBehaviour, IDiceCheckable
     public int slotValue;
    
     public Image PlaneImage;
-    private int previousSubtraction = 0;
-    private int AxisPilot;
-    private int AxisCoPilot;
+    private int previousSubtraction;
+    public int AxisPilot;
+    public int AxisCoPilot;
 
     void Start()
     {
+       
         ResetValues();
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+       
+        previousSubtraction = GameManager.Instance.previousSubtraction;
+
     }
     public void CheckDiceAmount(int diceAmount, GameObject dice)
     {
-     
+        
         slotValue = diceAmount;
         GameManager.Instance.Axiscounter++;
 
         AxisSlotHandler otherAxis = slot.GetComponent<AxisSlotHandler>();
         if (dice.GetComponent<DiceInstance>().IsBlueDice)
         {
-            Debug.Log(dice.GetComponent<DiceInstance>().IsBlueDice);
+            //Debug.Log(dice.GetComponent<DiceInstance>().IsBlueDice);
             if (otherAxis.slotValue > 0) {
                 AxisPilot = diceAmount;
                 AxisCoPilot = otherAxis.slotValue; 
             }
-            else
-            {
-                ResetValues();
-            }
+           
            
         }
     
@@ -45,51 +51,43 @@ public class AxisSlotHandler : MonoBehaviour, IDiceCheckable
                 AxisPilot = otherAxis.slotValue;
                 AxisCoPilot = diceAmount;
             }
-            else
-            {
-                ResetValues();
-            }
+            
         }
-        Debug.Log($"AxisCoPilot {AxisCoPilot} and AxisPilot {AxisPilot}");
+        //Debug.Log($"AxisCoPilot {AxisCoPilot} and AxisPilot {AxisPilot}");
 
         if (AxisPilot > 0 && AxisCoPilot > 0)
         {
             int currentSubtraction = AxisPilot - AxisCoPilot;
             ResetValues();
+            otherAxis.slotValue = 0;
             HandleRotation(currentSubtraction);
         }
-        else
-        {
-            ResetValues();
-        }
+        
     }
 
-    private void HandleRotation(int currentSubtraction)
+
+
+    public void HandleRotation(int currentSubtraction)
     {
-        int totalSubtraction = previousSubtraction + currentSubtraction;
-        Debug.Log($"Total Subtraction: {totalSubtraction}");
+        int totalSubtraction = GameManager.Instance.previousSubtraction + currentSubtraction;
+        //Debug.Log($"Total Subtraction: {totalSubtraction}");
 
         if (Math.Abs(totalSubtraction) >= 4)
         {
-            GameOver();
+            GameManager.Instance.GameOver();
             return;
         }
-      
+
         RectTransform rectTransform = PlaneImage.GetComponent<RectTransform>();
         rectTransform.Rotate(new Vector3(0, 0, currentSubtraction * 30));
-        previousSubtraction = totalSubtraction;
-        
-}
+        GameManager.Instance.previousSubtraction = totalSubtraction;
+        ResetValues();
+    }
 
-  void ResetValues()
+    void ResetValues()
     {
         AxisPilot = 0;
         AxisCoPilot = 0;
-    }
-    private void GameOver()
-    {
-        GameManager.Instance.IsPlaneStable = false; 
-        Debug.Log("Game Over! The plane has crashed!");
-        
+        slotValue = 0;
     }
 }
