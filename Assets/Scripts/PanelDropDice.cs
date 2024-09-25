@@ -11,8 +11,24 @@ public class PanelDropDice : MonoBehaviour, IDropHandler
         //Debug.Log("dropped");
         GameObject dropped = eventData.pointerDrag;
         DragDrop draggableItem = dropped.GetComponent<DragDrop>();
-        draggableItem.parentAfterDrag = transform;
-        dropped.transform.SetParent(gameObject.transform);
+        
+        
+        if (dropped.GetComponent<DiceInstance>().IsBlueDice == true && gameObject.CompareTag("Pilot") && dropped == GameManager.Instance.currentDraggableDice)
+        {
+            dropped.transform.SetParent(gameObject.transform);
+            draggableItem.parentAfterDrag = transform;
+            GameManager.Instance.OnDiceDrag.Invoke();
+            GameManager.Instance.currentDraggableDice = null;
+        }
+        else if (dropped.GetComponent<DiceInstance>().IsBlueDice == false && gameObject.CompareTag("CoPilot") && dropped == GameManager.Instance.currentDraggableDice)
+        {
+            dropped.transform.SetParent(gameObject.transform);
+            draggableItem.parentAfterDrag = transform;
+            GameManager.Instance.OnDiceDrag.Invoke();
+            GameManager.Instance.currentDraggableDice = null;
+        }
+
+       
        
     }
 }

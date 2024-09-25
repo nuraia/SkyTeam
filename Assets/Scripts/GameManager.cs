@@ -5,56 +5,49 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+using DG.Tweening;
+using UnityEngine.Events;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     public List<GameObject>Flaps = new List<GameObject>();
     public List<GameObject>Friction = new List<GameObject>();
-    public GameObject PlanePanel;
+    
+    
     public GameObject GameoverPanel;
     public Image PlaneImage;
     public int previousSubtraction = 0;
-    public int EndingRangeIndex;
-    public int StaringRangeIndex;
+   
     public int AxisDifference;
-    public int EngineSum;
+   
     public int Enginecounter;
     public int Axiscounter;
     public bool IsPlaneStable = true;
+    public bool EngineFlag = false;
     public int FrictionCount;
+    int bluedot = 0;
+    int orangedot = 0;
+    public int turn;
+    public GameObject currentDraggableDice;
+    public UnityEvent OnDiceDrag;
+    public UnityEvent OnAllEnable;
     void Awake()
     {
         if(Instance == null) Instance = this;
         else Destroy(Instance);
-        EndingRangeIndex = 0;
-        StaringRangeIndex = 0;
+      
         TurnManager.Instance.TurnOffSlot(Flaps);
         TurnManager.Instance.TurnOffSlot(Friction);
-        AxisDifference = 0;
-        EngineSum = 0;
+        
         Enginecounter = 0;
         FrictionCount = 0;
+        turn = 4;
+        currentDraggableDice = null;
     }
 
-    public void RangeColour(List<TextMeshProUGUI> RangeList)
-    {
-        if(!TurnManager.Instance.IsPilotTurn)
-        {
-            //if(StaringRangeIndex > 1) RangeList[StaringRangeIndex-1].GetComponent<TextMeshProUGUI>().color = Color.gray;
-            TextMeshProUGUI rangeText = RangeList[StaringRangeIndex].GetComponent<TextMeshProUGUI>();
-            rangeText.color = Color.cyan;
-            StaringRangeIndex++;
-        }
-        else
-        {
-            TextMeshProUGUI rangeText = RangeList[EndingRangeIndex].GetComponent<TextMeshProUGUI>();
-            rangeText.color = Color.red;
-            EndingRangeIndex++;
 
-        }
-
-    }
 
     public void NewSlotOpenFlaps()
     {
@@ -84,45 +77,36 @@ public class GameManager : MonoBehaviour
     {
         IsPlaneStable = false;
         GameoverPanel.SetActive(true);
-        TurnManager.Instance.GameTurn("GameOver");
+        //UIManager.Instance.PopMessage("GameOver");
         TurnManager.Instance.turnButton.gameObject.SetActive(false);
     }
 
-    public void EngineSlotChecker(int slotAmount)
+  
+
+
+
+    public void HandleRotation()
+
     {
-        Enginecounter++;
-        EngineSum += slotAmount;
-        int bluedot = 4 + StaringRangeIndex;
-        int orangedot = 8 + EndingRangeIndex;
+        Axiscounter = 2;
+        int AxisPilot = TurnManager.Instance.PilotAxis.GetComponentInChildren<DiceInstance>().diceNo;
+        int AxisCoPilot = TurnManager.Instance.CopilotAxis.GetComponentInChildren<DiceInstance>().diceNo;
+        
+        int currentSubtraction = AxisPilot - AxisCoPilot;
+        
+        int totalSubtraction = previousSubtraction + currentSubtraction;
         
 
-       // Debug.Log($"Engine Sum {EngineSum} starting Index {5 + StaringRangeIndex} and ending Index {8 + EndingRangeIndex}");
-        if (Enginecounter >= 2)
+        if (Math.Abs(totalSubtraction) >= 4)
         {
-            if (EngineSum >= bluedot && EngineSum <= orangedot)
-            {
-                if (PlanePanel.transform.childCount > 0)
-                {
-                    Destroy(PlanePanel.transform.GetChild(0).gameObject);
-            
-                }
-
-            }
-            else if (EngineSum > orangedot)
-            {
-
-                if (PlanePanel.transform.childCount > 1)
-                {
-                    Destroy(PlanePanel.transform.GetChild(0).gameObject);
-                    Destroy(PlanePanel.transform.GetChild(1).gameObject);
-                    
-
-                }
-
-            }
-
+           GameOver();
+            return;
         }
 
+        RectTransform rectTransform = PlaneImage.GetComponent<RectTransform>();
+        rectTransform.Rotate(new Vector3(0, 0, currentSubtraction * 30));
+        previousSubtraction = totalSubtraction;
+       
     }
 
 }

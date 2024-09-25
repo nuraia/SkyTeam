@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     
     public GameObject coffeePanel;
     public DiceInstance currentlyUsedCoffeeToken;
-    
+    public int currentlyUsedCoffeeTokenIndex;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
         coffeePanel.SetActive(false);
         DiceManager.Instance.DiceChangeSlot.GetComponent<Image>().sprite = null;
         currentlyUsedCoffeeToken = null;
+        currentlyUsedCoffeeTokenIndex  = 0;
     }
 
     public void OnClickCoffeeButton(int index)
@@ -56,7 +57,7 @@ public class UIManager : MonoBehaviour
         index = Math.Min(index, DiceManager.Instance.CoffeeButtonLists.Count-1);
        
         currentlyUsedCoffeeToken = DiceManager.Instance.CoffeeSlotLists[index].GetComponentInChildren<DiceInstance>();
-
+        currentlyUsedCoffeeTokenIndex = index;
     }
 
    

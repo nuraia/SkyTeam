@@ -8,20 +8,30 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 {
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
-    
+    void Start()
+    {
+        GameManager.Instance.OnDiceDrag.AddListener(ToggleDiceDrag);
+        GameManager.Instance.OnAllEnable.AddListener(ToggleAllDice);
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnBeginDrag");
-        parentAfterDrag = transform.parent;
-        transform.SetParent(transform.root);
-        transform.SetAsLastSibling();
-        image.raycastTarget = false;
+        
+       
+
+            parentAfterDrag = transform.parent;
+            transform.SetParent(transform.root);
+            transform.SetAsLastSibling();
+            image.raycastTarget = false;
+
+      
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnDrag");
+        //Debug.Log(parentAfterDrag.transform.childCount);
+        
         transform.position = Input.mousePosition;
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -29,12 +39,21 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         //Debug.Log("OnEndDrag");
         transform.SetParent((parentAfterDrag));
         image.raycastTarget = true;
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-       //Debug.Log(" OnPointerDown");
+        
     }
 
-   
+    void ToggleDiceDrag()
+    {
+        if(gameObject != GameManager.Instance.currentDraggableDice) this.enabled = !this.enabled;
+    }
+
+    void ToggleAllDice()
+    {
+        this.enabled = true;
+    }
 }

@@ -2,32 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FlapSlotHandler : MonoBehaviour, IDiceCheckable
+public class FlapSlotHandler : MonoBehaviour, IDropHandler
 {
     public List<int> requiredValues = new List<int>();
-    public List<TextMeshProUGUI> OrangeTextList = new List<TextMeshProUGUI>();
+    
     public bool IsMatched;
     public GameObject Dice;
 
-
-    public void CheckDiceAmount(int diceAmount, GameObject dice)
+    public void OnDrop(PointerEventData eventData)
     {
-        if (requiredValues.Contains(diceAmount))
+        if (transform.childCount != 0) return;
+        TurnManager.Instance.turnButton.gameObject.SetActive(true);
+        GameObject dropped = eventData.pointerDrag;
+        DragDrop draggableItem = dropped.GetComponent<DragDrop>();
+        if (GameManager.Instance.currentDraggableDice == null && (draggableItem.parentAfterDrag.gameObject.GetComponent<PanelDropDice>() != null))
         {
-            
-            //Debug.Log("Requirement fullfilled" + diceAmount);
-            gameObject.GetComponent<Image>().color = Color.green;
-            dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
-            GameManager.Instance.RangeColour(OrangeTextList);
+            GameManager.Instance.currentDraggableDice = dropped;
+            GameManager.Instance.OnDiceDrag.Invoke();
+        }
+        DiceInstance dice = dropped.GetComponent<DiceInstance>();
+        if (requiredValues.Contains(dice.diceNo) && !dice.IsBlueDice)
+        {
+            draggableItem.parentAfterDrag = transform;
+            //gameObject.GetComponent<Image>().color = Color.green;
+            //GameManager.Instance.Range();
             GameManager.Instance.NewSlotOpenFlaps();
-            Dice = dice;
+            IsMatched = true;
+            Dice = dropped;
         }
         else
         {
             IsMatched = false;
+
         }
-        
+
     }
+
+
+ 
 }

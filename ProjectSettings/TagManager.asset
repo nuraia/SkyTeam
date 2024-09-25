@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Orange
+  - Pilot
+  - CoPilot
+  - 0
+  - 1
+  - 2
   layers:
   - Default
   - TransparentFX

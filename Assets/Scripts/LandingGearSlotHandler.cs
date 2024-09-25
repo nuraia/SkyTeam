@@ -1,31 +1,44 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using DG.Tweening.Core.Easing;
 
-
-public class LandingGearSlotHandler : MonoBehaviour, IDiceCheckable
+public class LandingGearSlotHandler : MonoBehaviour, IDropHandler
 {
     public List<int> requiredValues = new List<int>();
-    public List<TextMeshProUGUI> BlueTextList = new List<TextMeshProUGUI>();
+   
     public bool IsMatched;
     public GameObject Dice;
-    public void CheckDiceAmount(int diceAmount, GameObject dice)
+    public void OnDrop(PointerEventData eventData)
     {
-        if (requiredValues.Contains(diceAmount))
+        //Debug.Log("Ondrop");
+
+        if (transform.childCount != 0) return;
+        TurnManager.Instance.turnButton.gameObject.SetActive(true);
+        GameObject dropped = eventData.pointerDrag;
+        DragDrop draggableItem = dropped.GetComponent<DragDrop>();
+        
+        if (GameManager.Instance.currentDraggableDice == null && (draggableItem.parentAfterDrag.gameObject.GetComponent<PanelDropDice>() != null)) 
         {
-            gameObject.GetComponent<Image>().color = Color.green;
-            dice.GetComponent<CanvasGroup>().blocksRaycasts = false;
-            GameManager.Instance.RangeColour(BlueTextList);
+            GameManager.Instance.currentDraggableDice = dropped;
+            GameManager.Instance.OnDiceDrag.Invoke(); 
+        }
+        DiceInstance dice = dropped.GetComponent<DiceInstance>();
+        if (requiredValues.Contains(dice.diceNo) && dice.IsBlueDice)
+        {
+            draggableItem.parentAfterDrag = transform;
+            
+            //GameManager.Instance.Range();
             IsMatched = true;
-            Dice = dice;
+            Dice = dropped;
         }
         else
         {
             IsMatched = false;
+            
         }
+
     }
- 
 }

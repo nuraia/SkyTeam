@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -147,14 +148,22 @@ public class DiceManager : MonoBehaviour
     }
     void ClearCoffeeToken()
     {
-       
-        if(UIManager.Instance.currentlyUsedCoffeeToken != null) Destroy(UIManager.Instance.currentlyUsedCoffeeToken.gameObject);
+
+        if (UIManager.Instance.currentlyUsedCoffeeToken != null)
+        {
+            //Debug.Log(UIManager.Instance.currentlyUsedCoffeeToken);
+            CoffeeSlotLists.Remove(UIManager.Instance.currentlyUsedCoffeeToken.gameObject);
+            Destroy(UIManager.Instance.currentlyUsedCoffeeToken.gameObject);
+           
+        }
         DiceChangeSlot.GetComponent<Image>().sprite = null;
         UIManager.Instance.coffeePanel.SetActive(false);
-        if(CoffeeButtonLists.Count > 0){
-            CoffeeButtonLists[CoffeeButtonLists.Count-1].gameObject.SetActive(false);
-            CoffeeButtonLists.RemoveAt(CoffeeButtonLists.Count-1);
+        if(CoffeeButtonLists.Count-1 >= 0)
+        {
+            CoffeeButtonLists[UIManager.Instance.currentlyUsedCoffeeTokenIndex].gameObject.SetActive(false);
+            CoffeeButtonLists.RemoveAt(UIManager.Instance.currentlyUsedCoffeeTokenIndex);
         }
+        else Debug.Log("Button coudnt be removed");
     }
 }
 

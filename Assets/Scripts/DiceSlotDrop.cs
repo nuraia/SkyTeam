@@ -11,6 +11,11 @@ public class DiceSlotDrop : MonoBehaviour, IDropHandler
         TurnManager.Instance.turnButton.gameObject.SetActive(true);
         GameObject dropped = eventData.pointerDrag;
         DragDrop draggableItem = dropped.GetComponent<DragDrop>();
+        if (GameManager.Instance.currentDraggableDice == null && (draggableItem.parentAfterDrag.gameObject.GetComponent<PanelDropDice>() != null))
+        {
+            GameManager.Instance.currentDraggableDice = dropped;
+            GameManager.Instance.OnDiceDrag.Invoke();
+        }
         draggableItem.parentAfterDrag = transform;
         DiceInstance dice = dropped.GetComponent<DiceInstance>();
         IDiceCheckable checkable = gameObject.GetComponent<IDiceCheckable>();

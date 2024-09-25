@@ -441,7 +441,6 @@ GameObject:
   - component: {fileID: 142376337}
   - component: {fileID: 142376336}
   - component: {fileID: 142376334}
-  - component: {fileID: 142376333}
   - component: {fileID: 142376338}
   m_Layer: 5
   m_Name: 'BP2Slot1 '
@@ -469,18 +468,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &142376333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142376331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &142376334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,7 +556,6 @@ GameObject:
   - component: {fileID: 147463031}
   - component: {fileID: 147463033}
   - component: {fileID: 147463032}
-  - component: {fileID: 147463034}
   - component: {fileID: 147463035}
   - component: {fileID: 147463036}
   m_Layer: 5
@@ -636,18 +622,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147463030}
   m_CullTransparentMesh: 1
---- !u!114 &147463034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147463030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &147463035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,15 +659,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0100000002000000
-  BlueTextList:
-  - {fileID: 1097878773}
-  - {fileID: 246568450}
-  - {fileID: 203516147}
-  - {fileID: 221888210}
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &166262373
@@ -840,7 +805,7 @@ GameObject:
   - component: {fileID: 170567549}
   m_Layer: 5
   m_Name: Player1 Dice Panel
-  m_TagString: Untagged
+  m_TagString: Pilot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1081,7 +1046,6 @@ GameObject:
   - component: {fileID: 194778964}
   - component: {fileID: 194778963}
   - component: {fileID: 194778961}
-  - component: {fileID: 194778960}
   - component: {fileID: 194778965}
   m_Layer: 5
   m_Name: 'OPSlot1 '
@@ -1109,18 +1073,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &194778960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194778958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &194778961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,11 +1148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0100000002000000
-  OrangeTextList:
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &196660953
@@ -1756,6 +1703,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 246568448}
   m_CullTransparentMesh: 1
+--- !u!1 &261398360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 261398361}
+  - component: {fileID: 261398362}
+  m_Layer: 0
+  m_Name: TurnShiftManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &261398361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261398360}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1314839055}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261398362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261398360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4128411590cd24bac760b728c58d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlapsSlots:
+  - {fileID: 194778958}
+  - {fileID: 794711403}
+  - {fileID: 846294633}
+  - {fileID: 1630590108}
+  GearSlots:
+  - {fileID: 147463030}
+  - {fileID: 1897918448}
+  - {fileID: 292962914}
+  FrictionSlots:
+  - {fileID: 142376331}
+  - {fileID: 1439997783}
+  - {fileID: 1819260565}
+  EngineSlots: []
+  BlueTextList:
+  - {fileID: 246568450}
+  - {fileID: 203516147}
+  - {fileID: 221888210}
+  OrangeTextList:
+  - {fileID: 267914933}
+  - {fileID: 958887645}
+  - {fileID: 1567329866}
+  - {fileID: 47190656}
+  PlanePanel: {fileID: 447126344}
+  EndingRangeIndex: 0
+  StaringRangeIndex: 0
+  EngineSum: 0
 --- !u!1 &267914931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,7 +2065,6 @@ GameObject:
   - component: {fileID: 292962915}
   - component: {fileID: 292962917}
   - component: {fileID: 292962916}
-  - component: {fileID: 292962918}
   - component: {fileID: 292962919}
   - component: {fileID: 292962920}
   m_Layer: 5
@@ -2114,18 +2131,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292962914}
   m_CullTransparentMesh: 1
---- !u!114 &292962918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292962914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &292962919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,15 +2168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0500000006000000
-  BlueTextList:
-  - {fileID: 1097878773}
-  - {fileID: 246568450}
-  - {fileID: 203516147}
-  - {fileID: 221888210}
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &295948074
@@ -2423,19 +2419,9 @@ MonoBehaviour:
   - {fileID: 166262373}
   - {fileID: 1028811959}
   - {fileID: 176738950}
-  FlapsFrictionGearSlots:
-  - {fileID: 147463030}
-  - {fileID: 1897918448}
-  - {fileID: 292962914}
-  - {fileID: 142376331}
-  - {fileID: 1439997783}
-  - {fileID: 1819260565}
-  - {fileID: 194778958}
-  - {fileID: 794711403}
-  - {fileID: 846294633}
-  - {fileID: 1630590108}
   GameoverPanel: {fileID: 989735924}
   GamewinPanel: {fileID: 686184666}
+  TurnShiftManager: {fileID: 0}
 --- !u!4 &305035683
 Transform:
   m_ObjectHideFlags: 0
@@ -2444,12 +2430,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305035681}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.11667, y: -395.30646, z: 0.8775781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1314839055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306938010
 GameObject:
@@ -2467,7 +2453,7 @@ GameObject:
   - component: {fileID: 306938017}
   m_Layer: 5
   m_Name: CoffeeButton2
-  m_TagString: Untagged
+  m_TagString: 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2748,8 +2734,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -356, y: 763}
-  m_SizeDelta: {x: 200, y: 250}
+  m_AnchoredPosition: {x: -359.57, y: 784.34}
+  m_SizeDelta: {x: 163.14, y: 31.2767}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &367891253
 MonoBehaviour:
@@ -2827,7 +2813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a4246264781a6f4895e1a2c4afbd06d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3024,12 +3010,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379994359}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.11667, y: -395.30646, z: 0.8775781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1314839055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &426879338
 GameObject:
@@ -4580,7 +4566,6 @@ GameObject:
   - component: {fileID: 794711409}
   - component: {fileID: 794711408}
   - component: {fileID: 794711406}
-  - component: {fileID: 794711405}
   - component: {fileID: 794711410}
   m_Layer: 5
   m_Name: OPSlot2
@@ -4608,18 +4593,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &794711405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 794711403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &794711406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4695,11 +4668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0200000003000000
-  OrangeTextList:
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &804591237
@@ -4810,6 +4778,7 @@ MonoBehaviour:
   animationDuration: 1
   coffeePanel: {fileID: 1221471300}
   currentlyUsedCoffeeToken: {fileID: 0}
+  currentlyUsedCoffeeTokenIndex: 0
 --- !u!4 &811868973
 Transform:
   m_ObjectHideFlags: 0
@@ -4818,12 +4787,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811868971}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.11667, y: -395.30646, z: 0.8775781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1314839055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833430786
 GameObject:
@@ -4856,10 +4825,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pilot: {fileID: 1243579361}
   copilot: {fileID: 1061829228}
+  CopilotEngine: {fileID: 377729588}
+  PilotEngine: {fileID: 2079657191}
+  CopilotAxis: {fileID: 2030868419}
+  PilotAxis: {fileID: 1781123583}
   turnButton: {fileID: 1120997493}
   IsPilotTurn: 1
   diceManager: {fileID: 379994360}
   gameRoundManager: {fileID: 305035682}
+  turnShiftManager: {fileID: 261398362}
   AllOrangeSlot:
   - {fileID: 194778958}
   - {fileID: 2030868419}
@@ -4879,12 +4853,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833430786}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.11667, y: -395.30646, z: 0.8775781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1314839055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &834925714
 GameObject:
@@ -5049,7 +5023,6 @@ GameObject:
   - component: {fileID: 846294639}
   - component: {fileID: 846294638}
   - component: {fileID: 846294636}
-  - component: {fileID: 846294635}
   - component: {fileID: 846294640}
   m_Layer: 5
   m_Name: OPSlot3
@@ -5077,18 +5050,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &846294635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846294633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &846294636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5164,11 +5125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0400000005000000
-  OrangeTextList:
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &849954498
@@ -5313,7 +5269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -50}
+  m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898526144
@@ -5957,7 +5913,7 @@ GameObject:
   - component: {fileID: 997924975}
   m_Layer: 5
   m_Name: CoffeeButton1
-  m_TagString: Untagged
+  m_TagString: 0
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6695,10 +6651,10 @@ RectTransform:
   - {fileID: 1195460775}
   m_Father: {fileID: 2081859620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 191.5, y: -634.5}
-  m_SizeDelta: {x: -767, y: -1341}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -258.5, y: 165.5}
+  m_SizeDelta: {x: 133, y: 259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061829230
 MonoBehaviour:
@@ -7120,7 +7076,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -737}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1120997493
 MonoBehaviour:
@@ -7198,7 +7154,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a4246264781a6f4895e1a2c4afbd06d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7373,9 +7329,9 @@ RectTransform:
   - {fileID: 292962915}
   m_Father: {fileID: 2081859620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 29, y: -803.56134}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 29, y: -3.5613403}
   m_SizeDelta: {x: 156, y: 584.877}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1126466944
@@ -8300,9 +8256,9 @@ RectTransform:
   m_Father: {fileID: 2081859620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -202.5, y: -634.5}
-  m_SizeDelta: {x: -765, y: -1341}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 247.5, y: 165.5}
+  m_SizeDelta: {x: 135, y: 259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243579363
 MonoBehaviour:
@@ -8417,6 +8373,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265023081}
   m_CullTransparentMesh: 1
+--- !u!1 &1314839054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314839055}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1314839055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314839054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 261398361}
+  - {fileID: 833430788}
+  - {fileID: 379994361}
+  - {fileID: 1564562265}
+  - {fileID: 811868973}
+  - {fileID: 305035683}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1339968185
 GameObject:
   m_ObjectHideFlags: 0
@@ -8563,7 +8556,6 @@ GameObject:
   - component: {fileID: 1439997789}
   - component: {fileID: 1439997788}
   - component: {fileID: 1439997786}
-  - component: {fileID: 1439997785}
   - component: {fileID: 1439997790}
   m_Layer: 5
   m_Name: BP2Slot2
@@ -8591,18 +8583,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1439997785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439997783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1439997786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8859,18 +8839,23 @@ MonoBehaviour:
   Friction:
   - {fileID: 1439997783}
   - {fileID: 1819260565}
-  PlanePanel: {fileID: 447126344}
   GameoverPanel: {fileID: 989735924}
   PlaneImage: {fileID: 470510754}
   previousSubtraction: 0
-  EndingRangeIndex: 0
-  StaringRangeIndex: 0
   AxisDifference: 0
-  EngineSum: 0
   Enginecounter: 0
   Axiscounter: 0
   IsPlaneStable: 1
+  EngineFlag: 0
   FrictionCount: 0
+  turn: 0
+  currentDraggableDice: {fileID: 0}
+  OnDiceDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllEnable:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1564562265
 Transform:
   m_ObjectHideFlags: 0
@@ -8879,12 +8864,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564562263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -32.11667, y: -395.30646, z: 0.8775781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1314839055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1567329864
 GameObject:
@@ -9614,7 +9599,6 @@ GameObject:
   - component: {fileID: 1630590114}
   - component: {fileID: 1630590113}
   - component: {fileID: 1630590111}
-  - component: {fileID: 1630590110}
   - component: {fileID: 1630590115}
   m_Layer: 5
   m_Name: OPSlot4
@@ -9642,18 +9626,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1630590110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630590108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1630590111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9729,11 +9701,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0500000006000000
-  OrangeTextList:
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &1646155316
@@ -9849,7 +9816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.5009766, y: -216.96094}
+  m_AnchoredPosition: {x: -3.5007324, y: -216.96094}
   m_SizeDelta: {x: -377, y: -1444.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1697784418
@@ -9931,7 +9898,7 @@ GameObject:
   - component: {fileID: 1707581039}
   m_Layer: 5
   m_Name: 'Player2Dice Panel '
-  m_TagString: Untagged
+  m_TagString: CoPilot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9973,9 +9940,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 15
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -10459,11 +10426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d94e14df6f0ee4a90d0bba453813d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 2030868419}
-  slotValue: 0
-  PlaneImage: {fileID: 470510754}
-  AxisPilot: 0
-  AxisCoPilot: 0
 --- !u!1 &1804125047
 GameObject:
   m_ObjectHideFlags: 0
@@ -10609,7 +10571,6 @@ GameObject:
   - component: {fileID: 1819260571}
   - component: {fileID: 1819260570}
   - component: {fileID: 1819260568}
-  - component: {fileID: 1819260567}
   - component: {fileID: 1819260572}
   m_Layer: 5
   m_Name: BP2Slot3
@@ -10637,18 +10598,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1819260567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819260565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1819260568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10812,7 +10761,6 @@ GameObject:
   - component: {fileID: 1897918449}
   - component: {fileID: 1897918451}
   - component: {fileID: 1897918450}
-  - component: {fileID: 1897918452}
   - component: {fileID: 1897918453}
   - component: {fileID: 1897918454}
   m_Layer: 5
@@ -10879,18 +10827,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897918448}
   m_CullTransparentMesh: 1
---- !u!114 &1897918452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897918448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e437d10868b9b2a4d95464a70eff7290, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1897918453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10928,15 +10864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredValues: 0300000004000000
-  BlueTextList:
-  - {fileID: 1097878773}
-  - {fileID: 246568450}
-  - {fileID: 203516147}
-  - {fileID: 221888210}
-  - {fileID: 267914933}
-  - {fileID: 958887645}
-  - {fileID: 1567329866}
-  - {fileID: 47190656}
   IsMatched: 0
   Dice: {fileID: 0}
 --- !u!1 &1900964803
@@ -10955,7 +10882,7 @@ GameObject:
   - component: {fileID: 1900964810}
   m_Layer: 5
   m_Name: CoffeeButton3
-  m_TagString: Untagged
+  m_TagString: 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11584,11 +11511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d94e14df6f0ee4a90d0bba453813d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1781123583}
-  slotValue: 0
-  PlaneImage: {fileID: 470510754}
-  AxisPilot: 0
-  AxisCoPilot: 0
 --- !u!1 &2079657191
 GameObject:
   m_ObjectHideFlags: 0
@@ -11990,8 +11912,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1484495079}
   - {fileID: 1901593859}
-  - {fileID: 833430788}
-  - {fileID: 379994361}
-  - {fileID: 1564562265}
-  - {fileID: 811868973}
-  - {fileID: 305035683}
+  - {fileID: 1314839055}
