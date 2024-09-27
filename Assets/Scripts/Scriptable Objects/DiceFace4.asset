@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DiceFace4
   m_EditorClassIdentifier: 
   diceNumber: 4
-  OrangeDiceFace: {fileID: 21300000, guid: 6d0e13799263fbf4da623df3430d240b, type: 3}
-  BlueDiceFace: {fileID: 21300000, guid: 75e2c797ed08a1a449b21d708d246563, type: 3}
+  OrangeDiceFace: {fileID: 21300000, guid: b2562b7f0a7909a4d9e1c2a86846bcef, type: 3}
+  BlueDiceFace: {fileID: 21300000, guid: aa2c79472fb299e44be3f62cdadb37ad, type: 3}
   Prefab: {fileID: 8628122758125618605, guid: da97234a00ae78f4a81bc06b78da9ab4, type: 3}

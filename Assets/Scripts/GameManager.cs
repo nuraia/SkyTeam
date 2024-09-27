@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         }
 
         RectTransform rectTransform = PlaneImage.GetComponent<RectTransform>();
-        rectTransform.Rotate(new Vector3(0, 0, currentSubtraction * 30));
+        rectTransform.Rotate(new Vector3(0, 0, currentSubtraction * 5));
         previousSubtraction = totalSubtraction;
        
     }
