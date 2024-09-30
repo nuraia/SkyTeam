@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ public class DiceManager : MonoBehaviour
     public GameObject PilotDiceSlot;
     public GameObject CopilotDiceSlot;
     public GameObject DiceChangeSlot;
+    public GameObject currentDiceClicked;
     public GameObject PlusOne;
     public GameObject MinusOne;
 
@@ -58,7 +60,7 @@ public class DiceManager : MonoBehaviour
             {
                 for (int i = 1; i <= 4; i++)
                 {
-                    int RandomIndex = Random.Range(1, 7);
+                    int RandomIndex = UnityEngine.Random.Range(1, 7);
                     currentDiceRoll = DiceFaceList[RandomIndex - 1];
                     Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
                     InstantiatedDiceImage.sprite = currentDiceRoll.BlueDiceFace;
@@ -77,7 +79,7 @@ public class DiceManager : MonoBehaviour
 
                 for (int i = 1; i <= 4; i++)
                 {
-                    int RandomIndex = Random.Range(1, 7);
+                    int RandomIndex = UnityEngine.Random.Range(1, 7);
                     currentDiceRoll = DiceFaceList[RandomIndex - 1];
                     Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
                     InstantiatedDiceImage.sprite = currentDiceRoll.OrangeDiceFace;
@@ -107,14 +109,15 @@ public class DiceManager : MonoBehaviour
             var prefabImage = DicePrefab.GetComponentInChildren<Image>();
             DiceChangeSlot.GetComponent<Image>().sprite = prefabImage.sprite;
         }
-        Plusbutton.onClick.AddListener(() => DiceAmountIncrease(DicePrefab));
-        Minusbutton.onClick.AddListener(() => DiceAmountDecrease(DicePrefab));
+       
+       Plusbutton.onClick.AddListener(() => DiceAmountIncrease(DicePrefab));
+       Minusbutton.onClick.AddListener(() => DiceAmountDecrease(DicePrefab));
     }
 
 
     public void DiceAmountIncrease(GameObject dice)
     {
-       
+        
         var diceInstance = dice.GetComponent<DiceInstance>();
         //Debug.Log(diceInstance.diceNo);
         if (diceInstance.diceNo < 6)
@@ -126,6 +129,7 @@ public class DiceManager : MonoBehaviour
             dice.GetComponent<DiceInstance>().diceNo = diceInstance.diceNo + 1;
             Button button = dice.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
+            
             ClearCoffeeToken();
         }
     }
@@ -140,30 +144,25 @@ public class DiceManager : MonoBehaviour
             if (diceInstance.IsBlueDice) diceImage.sprite = DiceFaceList[diceInstance.diceNo - 2].BlueDiceFace;
             else diceImage.sprite = DiceFaceList[diceInstance.diceNo - 2].OrangeDiceFace;
             dice.GetComponent<DiceInstance>().diceNo = diceInstance.diceNo - 1;
-            ClearCoffeeToken();
             Button button = dice.GetComponent<Button>();
-            Destroy(button);
+            button.onClick.RemoveAllListeners();
+            ClearCoffeeToken();
+            
         }
 
     }
     void ClearCoffeeToken()
     {
-
-        if (UIManager.Instance.currentlyUsedCoffeeToken != null)
-        {
-            //Debug.Log(UIManager.Instance.currentlyUsedCoffeeToken);
-            CoffeeSlotLists.Remove(UIManager.Instance.currentlyUsedCoffeeToken.gameObject);
-            Destroy(UIManager.Instance.currentlyUsedCoffeeToken.gameObject);
-           
-        }
         DiceChangeSlot.GetComponent<Image>().sprite = null;
         UIManager.Instance.coffeePanel.SetActive(false);
-        if(CoffeeButtonLists.Count-1 >= 0)
+        if (UIManager.Instance.currentlyUsedCoffeeTokenIndex != -1)
         {
-            CoffeeButtonLists[UIManager.Instance.currentlyUsedCoffeeTokenIndex].gameObject.SetActive(false);
-            CoffeeButtonLists.RemoveAt(UIManager.Instance.currentlyUsedCoffeeTokenIndex);
+            
+            if (CoffeeSlotLists[UIManager.Instance.currentlyUsedCoffeeTokenIndex].transform.childCount > 0) 
+            {
+                CoffeeSlotLists[UIManager.Instance.currentlyUsedCoffeeTokenIndex].GetComponent<CoffeeSlotHandler>().OnDestroy();
+            }
         }
-        else Debug.Log("Button coudnt be removed");
     }
 }
 

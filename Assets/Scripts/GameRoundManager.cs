@@ -26,58 +26,89 @@ public class GameRoundManager : MonoBehaviour
     }
     public void GameRoundEndCheck()
     {
-        if (currentRound <= GameRound)
+       
+        if (currentRound < GameRound)
         {
-            //Debug.Log(BlueSlotPanel.transform.childCount + OrangeSlotPanel.transform.childCount);
-            if (BlueSlotPanel.transform.childCount == 0 && OrangeSlotPanel.transform.childCount == 0)
+            if (GameRoundPanel.transform.childCount > 1)
             {
-                
-                //Debug.Log("current Round" + currentRound);
-                if (GameRoundPanel.transform.childCount == 1)
+
+
+                Destroy(GameRoundPanel.transform.GetChild(0).gameObject);
+                UIManager.Instance.PopMessage("New Turn");
+               
+                GameManager.Instance.EngineFlag = false;
+                NewTurnActivate();
+            }
+        }
+        
+
+
+        else 
+        {
+            Debug.Log("CR" + currentRound);
+            if (GameRoundPanel.transform.childCount == 1)
+            {
+
+                if (TurnShiftManager.PlanePanel.transform.childCount == 1)
                 {
-                    if (TurnShiftManager.PlanePanel.transform.childCount == 1)
+                    Debug.Log("1");
+                    if (GameManager.Instance.IsPlaneStable && TurnShiftManager.EngineSum <= 6 && GameManager.Instance.FrictionCount >= 3)
                     {
-                        if (GameManager.Instance.IsPlaneStable && TurnShiftManager.EngineSum <= 6 && GameManager.Instance.FrictionCount >= 3)
-                        {
-                            GamewinPanel.SetActive(true);
-                            TurnManager.Instance.turnButton.gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            GameManager.Instance.GameOver();
-                        }
+                        
+                        GamewinPanel.SetActive(true);
+                        TurnManager.Instance.turnButton.gameObject.SetActive(false);
                     }
                     else
                     {
                         GameManager.Instance.GameOver();
                     }
-
                 }
-                else if (GameRoundPanel.transform.childCount > 1)
-                {
+                
 
-
-                    Destroy(GameRoundPanel.transform.GetChild(0).gameObject);
-                    UIManager.Instance.PopMessage("New Turn");
-                    currentRound++;
-                    GameManager.Instance.EngineFlag = false;
-                    NewTurnActivate();
-                }
-
-
-                else
-                {
-                    GameManager.Instance.GameOver();
-                }
             }
-            else
-            {
-                TurnManager.Instance.PilotTurn--;
-                TurnManager.Instance.CoPilotTurn--;
-                TurnManager.Instance.turnButton.gameObject.SetActive(true);
-            }
-
+            
         }
+        currentRound++;
+        Debug.Log("CR" + currentRound);
+        //}
+        //else
+        //{
+        //    TurnManager.Instance.PilotTurn--;
+        //    TurnManager.Instance.CoPilotTurn--;
+        //    TurnManager.Instance.turnButton.gameObject.SetActive(true);
+        //}
+
+
+        //else if (currentRound == GameRound)
+        //{
+        //    if (BlueSlotPanel.transform.childCount == 0 && OrangeSlotPanel.transform.childCount == 0)
+        //    {
+
+        //        //Debug.Log("current Round" + currentRound);
+        //        if (GameRoundPanel.transform.childCount == 1)
+        //        {
+
+        //            if (TurnShiftManager.PlanePanel.transform.childCount == 1)
+        //            {
+        //                if (GameManager.Instance.IsPlaneStable && TurnShiftManager.EngineSum <= 6 && GameManager.Instance.FrictionCount >= 3)
+        //                {
+        //                    GamewinPanel.SetActive(true);
+        //                    TurnManager.Instance.turnButton.gameObject.SetActive(false);
+        //                }
+        //                else
+        //                {
+        //                    GameManager.Instance.GameOver();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                GameManager.Instance.GameOver();
+        //            }
+
+        //        }
+        //    }
+        //}
+
     }
   
 public void NewTurnActivate()

@@ -19,7 +19,7 @@ public class DiceSlotDrop : MonoBehaviour, IDropHandler
         draggableItem.parentAfterDrag = transform;
         DiceInstance dice = dropped.GetComponent<DiceInstance>();
         IDiceCheckable checkable = gameObject.GetComponent<IDiceCheckable>();
-        if (checkable != null) checkable.CheckDiceAmount(dice.diceNo, dropped);
+        if (checkable != null) checkable.CheckDiceAmount(dice.diceNo, dropped); 
 
 
     }
