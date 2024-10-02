@@ -146,7 +146,7 @@ public class TurnManager : MonoBehaviour
         CheckAxisSlot();
         GameManager.Instance.currentDraggableDice = null;
         GameManager.Instance.OnAllEnable.Invoke();
-
+        turnShiftManager.CheckCoffeeSlots();
         if (PilotTurn + CoPilotTurn > 9  )
         {
             _ = GameTurn("New Turn");

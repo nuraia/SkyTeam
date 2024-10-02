@@ -842,7 +842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &170567545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2174,7 +2174,10 @@ MonoBehaviour:
   - {fileID: 142376331}
   - {fileID: 1439997783}
   - {fileID: 1819260565}
-  EngineSlots: []
+  CoffeeSlots:
+  - {fileID: 987010067}
+  - {fileID: 306938010}
+  - {fileID: 1900964803}
   BlueComs:
   - {fileID: 166262373}
   OrangeComs:
@@ -2341,7 +2344,6 @@ GameObject:
   - component: {fileID: 289235698}
   - component: {fileID: 289235697}
   - component: {fileID: 289235696}
-  - component: {fileID: 289235699}
   m_Layer: 5
   m_Name: Coffee3
   m_TagString: Untagged
@@ -2463,18 +2465,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289235694}
   m_CullTransparentMesh: 1
---- !u!114 &289235699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289235694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc887a16393344408b9945f6b8db3fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &292962914
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,7 +2698,7 @@ MonoBehaviour:
   - {fileID: 176738950}
   GameoverPanel: {fileID: 989735924}
   GamewinPanel: {fileID: 686184666}
-  TurnShiftManager: {fileID: 0}
+  TurnShiftManager: {fileID: 261398362}
 --- !u!4 &305035683
 Transform:
   m_ObjectHideFlags: 0
@@ -4102,7 +4092,6 @@ GameObject:
   - component: {fileID: 569377156}
   - component: {fileID: 569377155}
   - component: {fileID: 569377154}
-  - component: {fileID: 569377157}
   m_Layer: 5
   m_Name: Coffee2
   m_TagString: Untagged
@@ -4224,18 +4213,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569377152}
   m_CullTransparentMesh: 1
---- !u!114 &569377157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569377152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc887a16393344408b9945f6b8db3fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &577757896
 GameObject:
   m_ObjectHideFlags: 0
@@ -5995,7 +5972,6 @@ GameObject:
   - component: {fileID: 898526146}
   - component: {fileID: 898526145}
   - component: {fileID: 898526144}
-  - component: {fileID: 898526147}
   m_Layer: 5
   m_Name: Coffee1
   m_TagString: Untagged
@@ -6117,18 +6093,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898526142}
   m_CullTransparentMesh: 1
---- !u!114 &898526147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898526142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc887a16393344408b9945f6b8db3fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &914722297
 GameObject:
   m_ObjectHideFlags: 0
@@ -11679,7 +11643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1707581035
 RectTransform:
   m_ObjectHideFlags: 0

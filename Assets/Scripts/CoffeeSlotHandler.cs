@@ -16,14 +16,19 @@ public class CoffeeSlotHandler : MonoBehaviour, IDiceCheckable
     }
     public void CheckDiceAmount(int diceAmount, GameObject dice)
     {
-        if (dice!= null)
-        {
-           coffeeTokenButton.gameObject.SetActive(true);
-           currentDice = dice;
-
-        }
+       
         
     }
+
+    public void CheckDice(GameObject dice)
+    {
+        
+       coffeeTokenButton.gameObject.SetActive(true);
+       currentDice = dice;
+
+        
+    }
+
     public void onButtonClick(int index)
     {
         CoffeeTokenOptionPanel.SetActive(true) ;

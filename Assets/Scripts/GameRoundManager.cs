@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ public class GameRoundManager : MonoBehaviour
     public GameObject OrangeSlotPanel;
     public GameObject BlueSlotPanel;
     public List<GameObject> AxisEngineSlots = new List<GameObject>();
-    
+    bool IsGameEnd;
     public GameObject GameoverPanel;
     public GameObject GamewinPanel;
     public TurnShiftManager TurnShiftManager;
@@ -23,8 +24,9 @@ public class GameRoundManager : MonoBehaviour
         currentRound = 1;
         GameoverPanel.SetActive(false);
         GamewinPanel.SetActive(false);
-            
+        IsGameEnd = false;
     }
+    [ContextMenu("GameRoundEndCheck()")]
     public void GameRoundEndCheck()
     {
         
@@ -43,11 +45,26 @@ public class GameRoundManager : MonoBehaviour
         
 
 
-        else if((currentRound == GameRound))
+        else
         {
-            Debug.Log("last round" );
-            GameEnd();
-            return;
+            IsGameEnd = true;
+            if (GameRoundPanel.transform.childCount == 1 && TurnShiftManager.PlanePanel.transform.childCount == 1)
+            {
+                Debug.Log("1");
+                if (GameManager.Instance.IsPlaneStable && TurnShiftManager.EngineSum <= 6 && GameManager.Instance.FrictionCount >= 3)
+                {
+
+                    GamewinPanel.SetActive(true);
+                    TurnManager.Instance.turnButton.gameObject.SetActive(false);
+                    TurnManager.Instance.turnButton.onClick.RemoveAllListeners();
+                }
+                else
+                {
+                    GameManager.Instance.GameOver();
+                }
+                StartCoroutine(GameEnd());
+            }
+           
         }
         
        
@@ -75,15 +92,11 @@ public void NewTurnActivate()
                 Destroy(diceComponent.gameObject);
             }
         }
-       
-            
+        
         GameManager.Instance.Axiscounter = 0;
         GameManager.Instance.Enginecounter = 0;
         GameManager.Instance.EngineFlag = false;
-        
-        
-   
-       
+     
     }
 
     public void OnRestartButtonClick()
@@ -91,25 +104,9 @@ public void NewTurnActivate()
         SceneManager.LoadScene(0);
     }
 
-    void GameEnd()
+    IEnumerator GameEnd()
     {
-        if (GameRoundPanel.transform.childCount == 1 && TurnShiftManager.PlanePanel.transform.childCount == 1)
-        {
-                Debug.Log("1");
-                if (GameManager.Instance.IsPlaneStable && TurnShiftManager.EngineSum <= 6 && GameManager.Instance.FrictionCount >= 3)
-                {
-
-                    GamewinPanel.SetActive(true);
-                    TurnManager.Instance.turnButton.gameObject.SetActive(false);
-                    TurnManager.Instance.turnButton.onClick.RemoveAllListeners();
-                }
-                else
-                {
-                    GameManager.Instance.GameOver();
-                }
-         }
-
-
-        
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
     }
 }

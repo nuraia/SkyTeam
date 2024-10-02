@@ -9,14 +9,14 @@ public class TurnShiftManager : MonoBehaviour
     public List<GameObject> FlapsSlots = new List<GameObject>();
     public List<GameObject> GearSlots = new List<GameObject>();
     public List<GameObject> FrictionSlots = new List<GameObject>();
-    public List<GameObject> EngineSlots = new List<GameObject>();
+    public List<GameObject> CoffeeSlots = new List<GameObject>();
     public List<GameObject> BlueComs = new List<GameObject>();
     public List<GameObject> OrangeComs = new List<GameObject>();
     
 
     public List<TextMeshProUGUI> BlueTextList = new List<TextMeshProUGUI>();
     public List<TextMeshProUGUI> OrangeTextList = new List<TextMeshProUGUI>();
-
+    
     public GameObject PlanePanel;
     public bool IsPlaneAvailable = false;
     public GameObject Plane = null;
@@ -49,6 +49,7 @@ public class TurnShiftManager : MonoBehaviour
                     if (dice.IsMatched)
                     {
                         FlapsSlots[i].GetComponent<Image>().color = Color.green;
+                        FlapsSlots[i].GetComponent<FlapSlotHandler>().enabled = false;
                         FlapsSlots[i].GetComponent<Image>().raycastTarget = false;
                         Destroy(FlapsSlots[i].transform.GetChild(0).gameObject);
                         EndingRangeIndex++;
@@ -76,8 +77,8 @@ public class TurnShiftManager : MonoBehaviour
                     var dice = GearSlots[i].GetComponent<LandingGearSlotHandler>();
                     if (dice.IsMatched)
                     {
-                        GearSlots[i].GetComponent<Image>().color = Color.green; 
-                        GearSlots[i].GetComponent<Image>().raycastTarget = false;
+                        GearSlots[i].GetComponent<Image>().color = Color.green;
+                        GearSlots[i].GetComponent<LandingGearSlotHandler>().enabled = false;
                         Destroy(GearSlots[i].transform.GetChild(0).gameObject);
                         StaringRangeIndex++;
                         Debug.Log("START" + StaringRangeIndex);
@@ -105,6 +106,7 @@ public class TurnShiftManager : MonoBehaviour
                     if (dice.IsMatched)
                     {
                         FrictionSlots[i].GetComponent<Image>().color = Color.green;
+                        GearSlots[i].GetComponent<DiceSlotHandler>().enabled = false;
                         FrictionSlots[i].GetComponent<Image>().raycastTarget = false;
                         Destroy(FrictionSlots[i].transform.GetChild(0).gameObject);
                         
@@ -208,5 +210,17 @@ public class TurnShiftManager : MonoBehaviour
         Destroy (Plane);
         IsPlaneAvailable = false;
         Plane = null;
+    }
+
+    public void CheckCoffeeSlots()
+    {
+        for(int i = 0; i < CoffeeSlots.Count; i++)
+        {
+            if (CoffeeSlots[i].transform.childCount > 0)
+            {
+                CoffeeSlots[i].gameObject.GetComponent<CoffeeSlotHandler>().CheckDice(CoffeeSlots[i].transform.GetChild(0).gameObject);
+                CoffeeSlots[i].transform.GetChild(0).gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
+        }
     }
 }
