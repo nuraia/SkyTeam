@@ -15,18 +15,18 @@ public class LandingGearSlotHandler : MonoBehaviour, IDropHandler
     {
         //Debug.Log("Ondrop");
 
-        if (transform.childCount != 0) return;
+        if (transform.childCount != 0 ) return;
         TurnManager.Instance.turnButton.gameObject.SetActive(true);
         GameObject dropped = eventData.pointerDrag;
         DragDrop draggableItem = dropped.GetComponent<DragDrop>();
         
-        if (GameManager.Instance.currentDraggableDice == null && (draggableItem.parentAfterDrag.gameObject.GetComponent<PanelDropDice>() != null)) 
+        if (GameManager.Instance.currentDraggableDice == null && (draggableItem.parentAfterDrag.gameObject.GetComponent<PanelDropDice>() != null) ) 
         {
             GameManager.Instance.currentDraggableDice = dropped;
             GameManager.Instance.OnDiceDrag.Invoke(); 
         }
         DiceInstance dice = dropped.GetComponent<DiceInstance>();
-        if (requiredValues.Contains(dice.diceNo) && dice.IsBlueDice)
+        if (requiredValues.Contains(dice.diceNo) && dice.IsBlueDice && !TurnManager.Instance.IsBlueAxisEngineEmpty)
         {
             draggableItem.parentAfterDrag = transform;
             

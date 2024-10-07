@@ -24,12 +24,12 @@ public class FlapSlotHandler : MonoBehaviour, IDropHandler
             GameManager.Instance.OnDiceDrag.Invoke();
         }
         DiceInstance dice = dropped.GetComponent<DiceInstance>();
-        if (requiredValues.Contains(dice.diceNo) && !dice.IsBlueDice)
+        if (requiredValues.Contains(dice.diceNo) && !dice.IsBlueDice && !TurnManager.Instance.IsOrangeAxisEngineEmpty)
         {
             draggableItem.parentAfterDrag = transform;
             //gameObject.GetComponent<Image>().color = Color.green;
             //GameManager.Instance.Range();
-            GameManager.Instance.NewSlotOpenFlaps();
+            
             IsMatched = true;
             Dice = dropped;
         }

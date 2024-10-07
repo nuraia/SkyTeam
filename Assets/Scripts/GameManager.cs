@@ -27,12 +27,12 @@ public class GameManager : MonoBehaviour
     public bool IsPlaneStable = true;
     public bool EngineFlag = false;
     public int FrictionCount;
-    int bluedot = 0;
-    int orangedot = 0;
-    public int turn;
+  
+    
     public GameObject currentDraggableDice;
     public UnityEvent OnDiceDrag;
     public UnityEvent OnAllEnable;
+    public UnityEvent OnAllDisable;
     void Awake()
     {
         if(Instance == null) Instance = this;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         
         Enginecounter = 0;
         FrictionCount = 0;
-        turn = 4;
+      
         currentDraggableDice = null;
     }
 

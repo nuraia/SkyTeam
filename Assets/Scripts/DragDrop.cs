@@ -12,6 +12,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         GameManager.Instance.OnDiceDrag.AddListener(ToggleDiceDrag);
         GameManager.Instance.OnAllEnable.AddListener(ToggleAllDice);
+        GameManager.Instance.OnAllDisable.AddListener(ToggleAllDiceFalse);
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -56,4 +57,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         this.enabled = true;
     }
+
+    void ToggleAllDiceFalse()
+    { this.enabled = false; }
 }

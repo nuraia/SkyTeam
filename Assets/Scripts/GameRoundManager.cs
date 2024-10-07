@@ -15,7 +15,7 @@ public class GameRoundManager : MonoBehaviour
     public GameObject OrangeSlotPanel;
     public GameObject BlueSlotPanel;
     public List<GameObject> AxisEngineSlots = new List<GameObject>();
-    bool IsGameEnd;
+    public GameObject RollAgainButton;
     public GameObject GameoverPanel;
     public GameObject GamewinPanel;
     public TurnShiftManager TurnShiftManager;
@@ -24,7 +24,9 @@ public class GameRoundManager : MonoBehaviour
         currentRound = 1;
         GameoverPanel.SetActive(false);
         GamewinPanel.SetActive(false);
-        IsGameEnd = false;
+        RollAgainButton.gameObject.SetActive(false);
+
+
     }
     [ContextMenu("GameRoundEndCheck()")]
     public void GameRoundEndCheck()
@@ -34,7 +36,8 @@ public class GameRoundManager : MonoBehaviour
         {
             if (GameRoundPanel.transform.childCount > 1)
             {
-                Destroy(GameRoundPanel.transform.GetChild(0).gameObject);
+                Destroy(GameRoundPanel.transform.GetChild(GameRoundPanel.transform.childCount-1).gameObject);
+                if(currentRound == 1 ||  currentRound == 5) RollAgainButton.gameObject.SetActive(true);
                 UIManager.Instance.PopMessage("New Turn");
                 currentRound++;
                 Debug.Log("CR" + currentRound);
@@ -47,7 +50,7 @@ public class GameRoundManager : MonoBehaviour
 
         else
         {
-            IsGameEnd = true;
+           
             if (GameRoundPanel.transform.childCount == 1 && TurnShiftManager.PlanePanel.transform.childCount == 1)
             {
                 Debug.Log("1");
@@ -73,6 +76,8 @@ public class GameRoundManager : MonoBehaviour
   
 public void NewTurnActivate()
     {
+        DiceManager.Instance.ClearSlots(DiceManager.Instance.PilotDiceSlot);
+        DiceManager.Instance.ClearSlots(DiceManager.Instance.CopilotDiceSlot);
         TurnManager.Instance.diceManager.BlueDiceList.Clear(); 
         TurnManager.Instance.diceManager.OrangeDiceList.Clear();
         TurnManager.Instance.IsPilotTurn = true;
@@ -96,7 +101,8 @@ public void NewTurnActivate()
         GameManager.Instance.Axiscounter = 0;
         GameManager.Instance.Enginecounter = 0;
         GameManager.Instance.EngineFlag = false;
-     
+        TurnManager.Instance.IsBlueAxisEngineEmpty = false;
+        TurnManager.Instance.IsOrangeAxisEngineEmpty = false;
     }
 
     public void OnRestartButtonClick()
@@ -108,5 +114,17 @@ public void NewTurnActivate()
     {
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(0);
+    }
+
+    public void NewDiceRoll()
+    {
+        DiceManager.Instance.ClearSlots(DiceManager.Instance.PilotDiceSlot);
+        DiceManager.Instance.ClearSlots(DiceManager.Instance.CopilotDiceSlot);
+        TurnManager.Instance.diceManager.BlueDiceList.Clear();
+        TurnManager.Instance.diceManager.OrangeDiceList.Clear();
+        TurnManager.Instance.IsPilotTurn = true;
+        TurnManager.Instance.TurnInitiate(TurnManager.Instance.IsPilotTurn);
+        RollAgainButton.gameObject.SetActive(false);
+        TurnManager.Instance.OnClickTurnShift();
     }
 }

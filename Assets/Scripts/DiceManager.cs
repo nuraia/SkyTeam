@@ -27,7 +27,7 @@ public class DiceManager : MonoBehaviour
     public GameObject MinusOne;
 
     private DiceRoll currentDiceRoll;
-    int coffee = 0;
+    
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -65,6 +65,7 @@ public class DiceManager : MonoBehaviour
                     Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
                     InstantiatedDiceImage.sprite = currentDiceRoll.BlueDiceFace;
                     var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
+                   
                     IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
                     IntstantiatedDice.GetComponent<DiceInstance>().CheckDice(true);
                     Button button = IntstantiatedDice.GetComponent<Button>();
@@ -72,6 +73,7 @@ public class DiceManager : MonoBehaviour
                     BlueDiceList.Add(currentDiceRoll.Prefab);
                     
                 }
+              
                 TurnManager.Instance.turnButton.gameObject.SetActive(true);
         }
             else
@@ -84,19 +86,23 @@ public class DiceManager : MonoBehaviour
                     Image InstantiatedDiceImage = currentDiceRoll.Prefab.GetComponentInChildren<Image>();
                     InstantiatedDiceImage.sprite = currentDiceRoll.OrangeDiceFace;
                     var IntstantiatedDice = Instantiate(currentDiceRoll.Prefab, panel.transform);
+                    
                     IntstantiatedDice.GetComponent<DiceInstance>().LoadDiceData(currentDiceRoll);
                     IntstantiatedDice.GetComponent<DiceInstance>().CheckDice(false);
                     Button button = IntstantiatedDice.GetComponent<Button>();
                     button.onClick.AddListener(() => OnPrfabClick(IntstantiatedDice));
                     OrangeDiceList.Add(currentDiceRoll.Prefab);
                 }
-                
 
+                
                 TurnManager.Instance.IsPilotTurn = true;
                 TurnManager.Instance.GameTurn("Game Starts");
                 currentDiceRoll.Prefab.GetComponentInChildren<Image>().sprite = null;
             }
-       
+        TurnManager.Instance.PilotTurn = 0;
+        TurnManager.Instance.CoPilotTurn = 0;
+
+
     }
     public void OnPrfabClick(GameObject DicePrefab)
     {
@@ -162,6 +168,14 @@ public class DiceManager : MonoBehaviour
             {
                 CoffeeSlotLists[UIManager.Instance.currentlyUsedCoffeeTokenIndex].GetComponent<CoffeeSlotHandler>().OnDestroy();
             }
+        }
+    }
+
+    public void ClearSlots(GameObject Slot)
+    {
+        foreach (Transform child in Slot.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

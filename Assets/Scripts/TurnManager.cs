@@ -28,6 +28,8 @@ public class TurnManager : MonoBehaviour
     public int CoPilotTurn = 0;
     int PlaneImage = 0;
     int planeSlot = 0;
+    public bool IsBlueAxisEngineEmpty;
+    public bool IsOrangeAxisEngineEmpty;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -35,6 +37,8 @@ public class TurnManager : MonoBehaviour
     }
     private void Start()
     {
+        IsBlueAxisEngineEmpty = false;
+        IsOrangeAxisEngineEmpty = false;
         turnButton.onClick.AddListener(OnClickTurnShift);
         IsPilotTurn = true;
         TurnInitiate(IsPilotTurn);
@@ -50,23 +54,30 @@ public class TurnManager : MonoBehaviour
         UIManager.Instance.PopMessage("Roll Dice");
         PlaneImage = 1;
         planeSlot = 1;
+        IsBlueAxisEngineEmpty = false;
+        IsOrangeAxisEngineEmpty = false;
     }
 
     public async UniTask ActivatePilot()
     {
-        PilotTurn++;
+       
         pilot.GetComponent<Image>().color = Color.green;
 
-        if (PilotTurn > 3)
+        if (PilotTurn > 1)
         {
-            if (!GameManager.Instance.EngineFlag && GameManager.Instance.Enginecounter != 2)
+            if (PilotEngine.transform.childCount != 1 || PilotAxis.transform.childCount != 1)
             {
-                UIManager.Instance.PopMessage("Fill Engines or Axis");
+                UIManager.Instance.PopMessage("Fill Pilot Engines or Axis");
+                IsBlueAxisEngineEmpty = true;
                 //TurnOffAllWithoutAxisEngine(true);
             }
+            else IsBlueAxisEngineEmpty = false;
+
+
         }
         if (diceManager.BlueDiceList.Count <= 0)
         {
+           // Debug.Log("blurr");
             TurnOffSlot(AllOrangeSlot);
             TurnOffSlot(AllBlueSlot);
             Button btn = pilot.GetComponentInChildren<Button>();
@@ -81,20 +92,25 @@ public class TurnManager : MonoBehaviour
 
         }
         IsPilotTurn = false;
+        PilotTurn++;
         
     }
 
     public async UniTask ActivateCopilot()
     {
-        CoPilotTurn++;
+        
         copilot.GetComponent<Image>().color = Color.green;
-        if (CoPilotTurn > 3)
+        if (CoPilotTurn > 1)
         {
-            if (!GameManager.Instance.EngineFlag && GameManager.Instance.Enginecounter != 2)
+            if (CopilotAxis.transform.childCount != 1 || CopilotEngine.transform.childCount != 1)
             {
-                UIManager.Instance.PopMessage("Fill Engines or Axis");
-                //TurnOffAllWithoutAxisEngine(false);
+                UIManager.Instance.PopMessage("Fill CoPilot Engines or Axis ");
+                IsOrangeAxisEngineEmpty = true;
+                //TurnOffAllWithoutAxisEngine(true);
             }
+            else IsOrangeAxisEngineEmpty = false;
+
+
         }
         if (diceManager.OrangeDiceList.Count <= 0)
         {
@@ -112,7 +128,7 @@ public class TurnManager : MonoBehaviour
            
         }
         IsPilotTurn = true;
-        
+        CoPilotTurn++;
     }
 
     public async UniTask GameTurn(string message)
@@ -147,7 +163,7 @@ public class TurnManager : MonoBehaviour
         GameManager.Instance.currentDraggableDice = null;
         GameManager.Instance.OnAllEnable.Invoke();
         turnShiftManager.CheckCoffeeSlots();
-        if (PilotTurn + CoPilotTurn > 9  )
+        if (PilotTurn + CoPilotTurn >= 8  )
         {
             _ = GameTurn("New Turn");
             gameRoundManager.GameRoundEndCheck();
@@ -230,21 +246,5 @@ public class TurnManager : MonoBehaviour
     }
 
 
-    //void TurnOffAllWithoutAxisEngine(bool IsBlue)
-    //{
-    //    if(IsBlue)
-    //    {
-    //        TurnOffSlot(turnShiftManager.GearSlots);
-    //        TurnOffButton(turnShiftManager.FrictionSlots[0]);
-    //        TurnOffSlot(turnShiftManager.BlueComs);
-    //    }
-    //    else
-    //    {
-    //        TurnOffSlot(turnShiftManager.OrangeComs);
-    //        TurnOffSlot(turnShiftManager.FlapsSlots);
-    //    }
-
-    //    TurnOffSlot(turnShiftManager.CoffeeSlots);
-
-    //}
+ 
 }

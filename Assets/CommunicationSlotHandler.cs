@@ -10,10 +10,11 @@ public class CommunicationSlotHandler : MonoBehaviour, IDropHandler
     public List<GameObject> PlaneList = new ();
     public TurnShiftManager turnShiftManager;
  
-    void IDropHandler.OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         if (transform.childCount != 0) return;
         TurnManager.Instance.turnButton.gameObject.SetActive(true);
+         
         GameObject dropped = eventData.pointerDrag;
         DragDrop draggableItem = dropped.GetComponent<DragDrop>();
         if (GameManager.Instance.currentDraggableDice == null && (draggableItem.parentAfterDrag.gameObject.GetComponent<PanelDropDice>() != null))
@@ -22,6 +23,8 @@ public class CommunicationSlotHandler : MonoBehaviour, IDropHandler
             GameManager.Instance.OnDiceDrag.Invoke();
         }
         DiceInstance dice = dropped.GetComponent<DiceInstance>();
+        if (!TurnManager.Instance.IsBlueAxisEngineEmpty && !TurnManager.Instance.IsPilotTurn ) draggableItem.parentAfterDrag = transform;
+        else if (!TurnManager.Instance.IsOrangeAxisEngineEmpty && TurnManager.Instance.IsPilotTurn) draggableItem.parentAfterDrag = transform;
         if (PlaneList[turnShiftManager.PlanePanel.transform.childCount - dice.diceNo].transform.childCount > 0)
         {
             turnShiftManager.IsPlaneAvailable = true;
@@ -29,4 +32,6 @@ public class CommunicationSlotHandler : MonoBehaviour, IDropHandler
         }
        
     }
+
+    
 }

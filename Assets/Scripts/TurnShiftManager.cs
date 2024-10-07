@@ -52,6 +52,7 @@ public class TurnShiftManager : MonoBehaviour
                         FlapsSlots[i].GetComponent<FlapSlotHandler>().enabled = false;
                         FlapsSlots[i].GetComponent<Image>().raycastTarget = false;
                         Destroy(FlapsSlots[i].transform.GetChild(0).gameObject);
+                        GameManager.Instance.NewSlotOpenFlaps();
                         EndingRangeIndex++;
                         Debug.Log("End" + EndingRangeIndex);
                         FlapsSlots.Remove(FlapsSlots[i]);
@@ -106,7 +107,7 @@ public class TurnShiftManager : MonoBehaviour
                     if (dice.IsMatched)
                     {
                         FrictionSlots[i].GetComponent<Image>().color = Color.green;
-                        GearSlots[i].GetComponent<DiceSlotHandler>().enabled = false;
+                        FrictionSlots[i].GetComponent<DiceSlotHandler>().enabled = false;
                         FrictionSlots[i].GetComponent<Image>().raycastTarget = false;
                         Destroy(FrictionSlots[i].transform.GetChild(0).gameObject);
                         
@@ -219,7 +220,9 @@ public class TurnShiftManager : MonoBehaviour
             if (CoffeeSlots[i].transform.childCount > 0)
             {
                 CoffeeSlots[i].gameObject.GetComponent<CoffeeSlotHandler>().CheckDice(CoffeeSlots[i].transform.GetChild(0).gameObject);
+                
                 CoffeeSlots[i].transform.GetChild(0).gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+                CoffeeSlots[i].transform.GetChild(0).gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
             }
         }
     }
